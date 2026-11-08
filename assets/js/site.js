@@ -7,6 +7,8 @@
   const hasG = typeof gsap !== 'undefined';
   if (hasG && typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
   const TZ = 'America/Chicago';
+  // Booking inquiries: set to Dr. McGee's chosen address (e.g. 'hello@draarontmcgee.com'). Empty = form shows 'coming soon'.
+  const BOOKING_EMAIL = '';
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
   /* ---------- nav height var ---------- */
@@ -107,13 +109,13 @@
     const LINES = 26;
     function draw() {
       if (!vis) return cancelAnimationFrame(raf);
-      t += .0045; ctx.clearRect(0, 0, W, H); ctx.globalCompositeOperation = 'lighter';
+      t += .0045; ctx.clearRect(0, 0, W, H); ctx.globalCompositeOperation = 'source-over';
       const hx = (mx / innerWidth - .5), hy = (my / innerHeight - .5);
       for (let i = 0; i < LINES; i++) {
         const k = i / LINES, base = H * (.48 + k * .5);
         const g = ctx.createLinearGradient(0, 0, W, 0);
         const a = .05 + .14 * Math.sin(k * Math.PI);
-        g.addColorStop(0, `rgba(233,185,73,0)`); g.addColorStop(.35, `rgba(246,215,124,${a})`); g.addColorStop(.65, `rgba(87,199,143,${a * .6})`); g.addColorStop(1, `rgba(233,185,73,0)`);
+        g.addColorStop(0, `rgba(233,185,73,0)`); g.addColorStop(.35, `rgba(150,114,56,${a * .55})`); g.addColorStop(.65, `rgba(31,77,58,${a * .35})`); g.addColorStop(1, `rgba(233,185,73,0)`);
         ctx.strokeStyle = g; ctx.lineWidth = 1.1; ctx.beginPath();
         for (let x = 0; x <= W; x += 14) {
           const nx = x / W;
@@ -146,14 +148,20 @@
   const partsIn = d => { const o = {}; new Intl.DateTimeFormat('en-US', { timeZone: TZ, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(d).forEach(p => o[p.type] = +p.value || p.value); return o; };
   const tzOffset = d => { const p = partsIn(d); return (Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute) - Math.floor(d.getTime() / 60000) * 60000) / 60000; };
   const chicagoTime = (y, m, day, h, min) => { const g = new Date(Date.UTC(y, m, day, h, min)); return new Date(g.getTime() - tzOffset(g) * 60000); };
+  // Real dates only. Edit assets/data/hill-sprints.json: {"sessions":[{"date":"2026-11-21","time":"06:30","minutes":60}]}
+  let SESSIONS = [];
   function nextSession(now = new Date()) {
-    const p = partsIn(now);
-    for (let k = 0; k < 3; k++) {
-      const y = p.year + Math.floor((p.month - 1 + k) / 12), m = (p.month - 1 + k) % 12;
-      const d1 = 1 + ((6 - new Date(Date.UTC(y, m, 1)).getUTCDay() + 7) % 7);
-      for (const day of [d1, d1 + 14]) { const start = chicagoTime(y, m, day, 6, 30), end = new Date(start.getTime() + 45 * 60000); if (end > now) return { start, end }; }
+    for (const s of SESSIONS) {
+      const [y, m, d] = s.date.split('-').map(Number), [hh, mm] = (s.time || '06:30').split(':').map(Number);
+      const start = chicagoTime(y, m - 1, d, hh, mm), end = new Date(start.getTime() + (s.minutes || 60) * 60000);
+      if (end > now) return { start, end };
     }
+    return null;
   }
+  fetch('assets/data/hill-sprints.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
+    SESSIONS = (d.sessions || []).slice().sort((x, y) => (x.date + x.time).localeCompare(y.date + y.time));
+    sess = nextSession(); tick();
+  }).catch(() => {});
   const fmt = (d, o) => new Intl.DateTimeFormat('en-US', { timeZone: TZ, ...o }).format(d);
   const clockEl = $('[data-clock]'), shortEl = $('[data-next-short]'), longEl = $('[data-next-long]');
   const cd = { d: $('[data-cd="d"]'), h: $('[data-cd="h"]'), m: $('[data-cd="m"]'), s: $('[data-cd="s"]') };
@@ -162,7 +170,13 @@
   function tick() {
     const now = new Date();
     if (clockEl) clockEl.textContent = fmt(now, { hour: 'numeric', minute: '2-digit' }) + ' CT';
-    if (!sess || sess.end < now) sess = nextSession(now);
+    if (sess && sess.end < now) sess = nextSession(now);
+    document.documentElement.classList.toggle('no-hill-date', !sess);
+    if (!sess) {
+      if (shortEl) shortEl.textContent = 'dates on @coachacontent';
+      if (longEl) longEl.textContent = 'Next date coming soon';
+      return;
+    }
     const live = sess.start <= now;
     if (shortEl) shortEl.textContent = live ? 'Live now on Capitol Hill' : fmt(sess.start, { weekday: 'short', month: 'short', day: 'numeric' }) + ', 6:30 AM';
     if (longEl) longEl.textContent = live ? 'Happening right now. Come to the hill.' : fmt(sess.start, { weekday: 'long', month: 'long', day: 'numeric' }) + ', 6:30 a.m. CT';
@@ -172,6 +186,7 @@
   }
   tick(); setInterval(tick, 1000);
   $('[data-ics]')?.addEventListener('click', () => {
+    if (!sess) return;
     const z = d => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
     const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Dr Aaron McGee//Hill Sprints//EN', 'BEGIN:VEVENT', 'UID:hill-' + z(sess.start) + '@draaronmcgee', 'DTSTAMP:' + z(new Date()), 'DTSTART:' + z(sess.start), 'DTEND:' + z(sess.end), 'SUMMARY:Hill Sprints and Devotions with Coach A', 'LOCATION:Tennessee State Capitol\\, 600 Charlotte Ave\\, Nashville\\, TN 37243', 'DESCRIPTION:Faster. Stronger. Together. Park at the base on James Robertson Parkway or at the top off Charlotte Pike. Check @coachacontent for the lineup.', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); a.download = 'hill-sprints-and-devotions.ics'; a.click();
@@ -220,7 +235,7 @@
   /* ---------- instagram wall ---------- */
   const wall = $('[data-wall]');
   fetch('assets/data/wall.json').then(r => r.json()).then(items => {
-    [items.filter((_, i) => i % 2 === 0), items.filter((_, i) => i % 2 === 1)].forEach((row, k) => {
+    [items.slice(0, 24)].forEach((row, k) => {
       const el = document.createElement('div'); el.className = 'wall__row';
       const html = row.map(p => `<a href="${p.u}" target="_blank" rel="noopener" data-cursor="Open"><img src="${p.i}" alt="${p.a.replace(/"/g, '&quot;')}" loading="lazy"></a>`).join('');
       el.innerHTML = html + html.replace(/<a /g, '<a aria-hidden="true" tabindex="-1" ');
@@ -241,8 +256,16 @@
     if (!ok) return;
     const topics = tags.filter(c => c.classList.contains('is-on')).map(c => c.textContent.trim()).join(', ');
     const body = `Hi Dr. McGee,\n\nInterested in: ${topics}\n\n${f.msg.value}\n\n${f.name.value}${f.org.value ? '\n' + f.org.value : ''}\n${f.email.value}`;
-    location.href = `mailto:hello@journey2legacy.com?subject=${encodeURIComponent('Inquiry: ' + topics)}&body=${encodeURIComponent(body)}`;
+    if (!BOOKING_EMAIL) return;
+    location.href = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent('Inquiry: ' + topics)}&body=${encodeURIComponent(body)}`;
   });
+
+  if (!BOOKING_EMAIL) { const sb = $('[data-form] [type=submit]'); if (sb) { sb.disabled = true; sb.textContent = 'Online booking coming soon'; } }
+  else { const note = $('[data-form-note]'); if (note) note.innerHTML = `Opens your email app addressed to <a href="mailto:${BOOKING_EMAIL}">${BOOKING_EMAIL}</a>.`; }
+
+  /* ---------- fit footer name to the screen width ---------- */
+  const fitw = () => $$('[data-fitw]').forEach(el => { el.style.fontSize = '100px'; const rg = document.createRange(); rg.selectNodeContents(el); const w = rg.getBoundingClientRect().width, max = el.clientWidth * .92; el.style.fontSize = Math.min(100 * max / w, 240) + 'px'; });
+  fitw(); addEventListener('resize', fitw); document.fonts?.ready.then(fitw);
 
   /* ---------- split words ---------- */
   $$('.split').forEach(el => {
@@ -330,7 +353,7 @@
     });
 
     // MR -> DR
-    const dtl = gsap.timeline({ scrollTrigger: { trigger: '.doctor', start: 'top top', end: 'bottom bottom', scrub: .6 } });
+    if ($('.doctor')) { const dtl = gsap.timeline({ scrollTrigger: { trigger: '.doctor', start: 'top top', end: 'bottom bottom', scrub: .6 } });
     dtl.fromTo('.doctor__mr', { scale: 1.15, opacity: .2 }, { scale: 1, opacity: 1, duration: .8 })
       .to('.doctor__strike', { scaleX: 1, duration: .6, ease: 'power2.inOut' })
       .to('.doctor__mr', { opacity: 0, scale: .9, filter: 'blur(10px)', duration: .5 }, '+=.15')
@@ -340,10 +363,10 @@
       .fromTo('.doctor__burst i', { x: 0, y: 0, opacity: 1 }, { x: () => gsap.utils.random(-260, 260), y: () => gsap.utils.random(-220, 220), opacity: 0, duration: .9, ease: 'power3.out', stagger: .004 }, '-=.02')
       .fromTo('.doctor__photo', { opacity: 0, y: 80, rotate: -16 }, { opacity: 1, y: 0, rotate: -6, duration: .6 }, '-=.6')
       .fromTo('.doctor__copy', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: .6 }, '-=.4')
-      .to({}, { duration: .6 });
+      .to({}, { duration: .6 }); }
 
     // generic reveals
-    $$('.sechead .eyebrow, .sechead__sub, .offer, .stages__list li, .gantt__row, .coach__creds > div, .eps li, .links a, .hillcard, .countdown, .passport__head').forEach(el => {
+    $$('.sechead .eyebrow, .sechead__sub, .plist li, .offer, .stages__list li, .gantt__row, .coach__creds > div, .eps li, .links a, .hillcard, .countdown, .passport__head').forEach(el => {
       gsap.from(el, { y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
     });
     // image curtain reveals + face-anchored parallax
@@ -353,7 +376,6 @@
     });
     // BLE bg + footer drift + film zoom
     gsap.fromTo('.ble__bg', { xPercent: 0 }, { xPercent: -40, ease: 'none', scrollTrigger: { trigger: '.ble', start: 'top bottom', end: 'bottom top', scrub: true } });
-    gsap.fromTo('.foot__name', { xPercent: 8 }, { xPercent: -4, ease: 'none', scrollTrigger: { trigger: '.foot', start: 'top bottom', end: 'bottom bottom', scrub: true } });
     gsap.from('.film__frame', { scale: .86, ease: 'none', scrollTrigger: { trigger: '.film', start: 'top bottom', end: 'center center', scrub: true } });
 
     // hats: float, orbit on scroll, tilt with mouse
@@ -404,7 +426,7 @@
         .from('.fp--b', { xPercent: -60, yPercent: 20, rotate: -12, ease: 'none' }, 0)
         .from('.fp--c', { xPercent: -50, yPercent: -40, rotate: 10, ease: 'none' }, 0)
         .from('.fp--a', { rotate: -5, scale: .94, ease: 'none' }, 0);
-      ScrollTrigger.create({ trigger: '.sig', start: 'top 85%', once: true, onEnter: () => $('.sig').classList.add('is-on') });
+      if ($('.sig')) ScrollTrigger.create({ trigger: '.sig', start: 'top 85%', once: true, onEnter: () => $('.sig').classList.add('is-on') });
     }
     // give: twin marquees + floating hat
     const grows = $$('.give__row'); let gx = 0;
