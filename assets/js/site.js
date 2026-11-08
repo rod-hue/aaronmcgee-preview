@@ -347,6 +347,7 @@
 
     // manifesto words + counters + rings
     gsap.to('.manifesto .w', { opacity: 1, stagger: .02, ease: 'none', scrollTrigger: { trigger: '.manifesto__text', start: 'top 80%', end: 'bottom 45%', scrub: true } });
+    if ($('.stats')) ScrollTrigger.create({ trigger: '.stats', start: 'top 85%', once: true, onEnter: () => $('.stats').classList.add('is-in') });
     $$('.stat').forEach(st => {
       const el = $('[data-count]', st), ring = $('.ring__v', st), end = +el.dataset.count, dec = +(el.dataset.dec || 0), o = { v: 0 };
       ScrollTrigger.create({ trigger: st, start: 'top 88%', once: true, onEnter: () => {
