@@ -263,6 +263,9 @@
   if (!BOOKING_EMAIL) { const sb = $('[data-form] [type=submit]'); if (sb) { sb.disabled = true; sb.textContent = 'Online booking coming soon'; } }
   else { const note = $('[data-form-note]'); if (note) note.innerHTML = `Opens your email app addressed to <a href="mailto:${BOOKING_EMAIL}">${BOOKING_EMAIL}</a>.`; }
 
+  /* ---------- copy official bio ---------- */
+  $('[data-copy-bio]')?.addEventListener('click', e => { const txt = [...$$('[data-bio] p')].map(p => p.textContent).join('\n\n'); navigator.clipboard?.writeText(txt).then(() => { e.target.textContent = 'Copied'; setTimeout(() => e.target.textContent = 'Copy bio', 2000); }); });
+
   /* ---------- fit footer name to the screen width ---------- */
   const fitw = () => $$('[data-fitw]').forEach(el => { el.style.fontSize = '100px'; const rg = document.createRange(); rg.selectNodeContents(el); const w = rg.getBoundingClientRect().width, max = el.clientWidth * .92; el.style.fontSize = Math.min(100 * max / w, 240) + 'px'; });
   fitw(); addEventListener('resize', fitw); document.fonts?.ready.then(fitw);
