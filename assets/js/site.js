@@ -202,16 +202,22 @@
   if (pillars.length) { act(pillars[0]); pillars.forEach(p => { p.addEventListener('mouseenter', () => fine && act(p)); p.addEventListener('click', () => act(p)); p.addEventListener('focus', () => act(p)); }); }
 
   /* ---------- film ---------- */
-  const film = $('[data-film]');
-  if (film) {
+  // every [data-film]: silent preview loop while visible (captions show if present), click = restart with sound
+  const films = $$('[data-film]');
+  films.forEach(film => {
     const v = $('video', film), btn = $('.film__play', film);
+    const cc = on => [...v.textTracks].forEach(t => t.mode = on ? 'showing' : 'hidden');
+    cc(false);
     const load = () => { if (!v.getAttribute('src')) v.src = v.dataset.src; };
     new IntersectionObserver(([e]) => { if (e.isIntersecting) { load(); if (!film.classList.contains('is-playing')) v.play().catch(() => {}); } else v.pause(); }, { threshold: .2 }).observe(film);
-    const start = () => { load(); v.currentTime = 0; v.muted = false; v.loop = false; v.controls = true; film.classList.add('is-playing'); cur?.classList.remove('is-label'); v.play(); };
+    const start = () => {
+      films.forEach(o => { if (o !== film && o.classList.contains('is-playing')) { const ov = $('video', o); ov.pause(); ov.muted = true; ov.controls = false; o.classList.remove('is-playing'); } });
+      load(); v.currentTime = 0; v.muted = false; v.loop = false; v.controls = true; cc(true); film.classList.add('is-playing'); cur?.classList.remove('is-label'); v.play();
+    };
     btn.addEventListener('click', e => { e.stopPropagation(); start(); });
     film.addEventListener('click', () => { if (!film.classList.contains('is-playing')) start(); });
-    v.addEventListener('ended', () => { film.classList.remove('is-playing'); v.muted = true; v.loop = true; v.controls = false; v.play().catch(() => {}); });
-  }
+    v.addEventListener('ended', () => { film.classList.remove('is-playing'); v.muted = true; v.loop = true; v.controls = false; cc(false); v.play().catch(() => {}); });
+  });
 
   /* ---------- youtube lite + modal ---------- */
   const modal = $('[data-modal]'), mframe = $('.modal__frame');
@@ -380,7 +386,7 @@
     });
     // BLE bg + footer drift + film zoom
     gsap.fromTo('.ble__bg', { xPercent: 0 }, { xPercent: -40, ease: 'none', scrollTrigger: { trigger: '.ble', start: 'top bottom', end: 'bottom top', scrub: true } });
-    gsap.from('.film__frame', { scale: .86, ease: 'none', scrollTrigger: { trigger: '.film', start: 'top bottom', end: 'center center', scrub: true } });
+    gsap.from('.film > .wrap > .film__frame', { scale: .86, ease: 'none', scrollTrigger: { trigger: '.film', start: 'top bottom', end: 'center center', scrub: true } });
 
     // hats: float, orbit on scroll, tilt with mouse
     const hats = $$('.hat');

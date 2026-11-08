@@ -919,3 +919,20 @@ body{background:var(--bg);color:var(--text)}
   .stat:nth-child(n+3){border-top:1px solid var(--line2)}
 }
 @media (max-width:420px){.stat{padding:24px 14px}}
+
+/* BLE pitch + framework */
+.pitch{display:grid;grid-template-columns:1.55fr 1fr;gap:clamp(22px,3vw,48px);align-items:center;margin-top:clamp(50px,6vw,80px)}
+.pitch__frame{box-shadow:0 0 0 1px var(--line),0 40px 90px -40px rgba(40,44,36,.45)}
+.pitch__frame .film__cap b{font-size:clamp(18px,1.7vw,26px)}
+.film__video::cue{background:rgba(10,20,15,.72);color:#fff;font-family:Geist,system-ui,sans-serif;font-size:.8em;line-height:1.35}
+.framework .eyebrow{margin-bottom:10px}
+.framework__lede{font-family:var(--serif);font-weight:300;font-size:clamp(20px,1.8vw,26px);line-height:1.3;color:var(--text)}
+.framework__list{list-style:none;margin:22px 0 18px;border-top:1px solid var(--line)}
+.framework__list li{display:flex;align-items:baseline;gap:18px;padding:14px 0;border-bottom:1px solid var(--line2)}
+.framework__list .mono{color:var(--gold)}
+.framework__list b{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2vw,30px);color:var(--green)}
+.framework__note{color:var(--muted);font-size:10.5px;line-height:1.7}
+.ble__media--solo{grid-template-columns:1fr;text-align:center;justify-items:center}
+.ble__media--solo .ble__quote{max-width:900px}
+@media (max-width:900px){.pitch{grid-template-columns:1fr}}
+@media (max-width:600px){.pitch__frame{aspect-ratio:16/9}.pitch__frame .film__play{width:72px;height:72px}.pitch__frame .film__cap b{font-size:15px}.pitch__frame .film__cap{left:16px;right:16px;bottom:12px}}
