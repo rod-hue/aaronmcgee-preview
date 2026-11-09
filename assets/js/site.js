@@ -134,7 +134,7 @@
   const spot = $('.hero__spot'), backlight = $('.hero__backlight');
   $$('.hero__namefilm').forEach(v => { new IntersectionObserver(([e]) => e.isIntersecting && !reduce ? v.play().catch(() => {}) : v.pause()).observe(v); });
   const hfilm = $('.hero__film'); if (hfilm) { if (reduce) hfilm.removeAttribute('autoplay'); new IntersectionObserver(([e]) => e.isIntersecting && !reduce ? hfilm.play().catch(() => {}) : hfilm.pause()).observe(hfilm); }
-  if (fine && !reduce && hasG) {
+  if (hero && fine && !reduce && hasG) {
     const setters = layers.map(l => ({ d: +l.dataset.depth, x: gsap.quickTo(l, 'x', { duration: 1.2, ease: 'power3' }), y: gsap.quickTo(l, 'y', { duration: 1.2, ease: 'power3' }) }));
     hero.addEventListener('mousemove', e => {
       const r = hero.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
@@ -313,34 +313,38 @@
   /* ---------- draw-on paths: measure ---------- */
   $$('.draw').forEach(p => { try { p.style.setProperty('--len', Math.ceil(p.getTotalLength())); } catch (e) {} });
 
-  /* ---------- loader + intro ---------- */
-  const loader = $('.loader'), lbar = $('.loader__bar i'), num = $('.loader__n');
+  /* ---------- booking topic carried over from other pages (connect.html?topic=...) ---------- */
+  try { const tp = new URLSearchParams(location.search).get('topic'); if (tp) pickTag(tp); } catch (e) {}
+
+  /* ---------- loader (first homepage visit per session only) + intro ---------- */
+  let loader = $('.loader'); const lbar = $('.loader__bar i'), num = $('.loader__n');
+  let seen = false; try { seen = sessionStorage.getItem('am-seen') === '1'; sessionStorage.setItem('am-seen', '1'); } catch (e) {}
+  if (loader && seen) { loader.remove(); loader = null; }
   const crit = [$('.hero__man img')].filter(Boolean);
-  let done = 0; const total = crit.length || 1;
-  const prog = () => { const p = Math.round(done / total * 100); lbar.style.width = p + '%'; num.textContent = String(p).padStart(3, '0'); };
+  let done = 0; const total = crit.length;
+  const prog = () => { if (!loader) return; const p = total ? Math.round(done / total * 100) : 100; lbar.style.width = p + '%'; num.textContent = String(p).padStart(3, '0'); };
   crit.forEach(i => { if (i.complete) done++; else { i.addEventListener('load', () => { done++; prog(); }, { once: true }); i.addEventListener('error', () => { done++; prog(); }, { once: true }); } });
   prog();
-  const t0 = performance.now();
-  const ready = new Promise(res => { const chk = () => ((done >= total && document.fonts?.status !== 'loading') || performance.now() - t0 > 4000) ? res() : setTimeout(chk, 60); chk(); });
-  ready.then(() => setTimeout(intro, Math.max(0, 1100 - (performance.now() - t0))));
+  const t0 = performance.now(), cap = loader ? 4000 : 1200;
+  const ready = new Promise(res => { const chk = () => ((done >= total && document.fonts?.status !== 'loading') || performance.now() - t0 > cap) ? res() : setTimeout(chk, 60); chk(); });
+  ready.then(() => setTimeout(intro, loader ? Math.max(0, 1100 - (performance.now() - t0)) : 0));
 
   function intro() {
-    lbar.style.width = '100%'; num.textContent = '100';
-    if (!hasG || reduce) { loader.remove(); setupScroll(); return; }
+    if (loader) { lbar.style.width = '100%'; num.textContent = '100'; }
+    if (!hasG || reduce) { loader?.remove(); setupScroll(); return; }
     const tl = gsap.timeline();
-    tl.to('.loader__seal', { scale: .4, opacity: 0, rotate: 120, duration: .7, ease: 'power3.in' })
+    if (loader) tl.to('.loader__seal', { scale: .4, opacity: 0, rotate: 120, duration: .7, ease: 'power3.in' })
       .to('.loader__bar,.loader__n', { opacity: 0, duration: .3 }, '<')
       .to(loader, { clipPath: 'circle(0% at 58% 30%)', duration: 1.1, ease: 'expo.inOut' }, '-=.15')
-      .add(() => loader.remove())
-      .from('.hero__layer--name .hn b', { yPercent: 120, opacity: 0, stagger: .06, duration: 1.3, ease: 'expo.out' }, '-=.75')
-      .from('.hero__medal', { scale: .3, opacity: 0, rotate: -160, duration: 1.8, ease: 'expo.out' }, '-=1.15')
+      .add(() => loader.remove());
+    if ($('.hero__man')) tl.from('.hero__layer--name .hn b', { yPercent: 120, opacity: 0, stagger: .06, duration: 1.3, ease: 'expo.out' }, loader ? '-=.75' : 0)
       .from('.hero__man', { clipPath: 'inset(100% -20% 0% -20%)', y: 80, duration: 1.6, ease: 'expo.out' }, '-=1.6')
       .from('.hero__film', { opacity: 0, duration: 2.4 }, '<')
       .from('.hero__rays', { opacity: 0, duration: 2 }, '<')
-      .from('.hero__left > *', { y: 26, opacity: 0, stagger: .07, duration: .9, ease: 'power3.out' }, '-=1.1')
-      .from('.hero__chips .chip', { x: 40, opacity: 0, stagger: .1, duration: 1, ease: 'expo.out' }, '<.1')
-      .from('.hud', { yPercent: 100, duration: .9, ease: 'expo.out' }, '<.2')
-      .add(setupScroll, '-=.6');
+      .from('.hero__left > *', { y: 26, opacity: 0, stagger: .07, duration: .9, ease: 'power3.out' }, '-=1.1');
+    if ($('.phead')) tl.from('.phead__word', { yPercent: 40, opacity: 0, duration: 1.6, ease: 'expo.out' }, 0)
+      .from('.phead .wrap > *', { y: 34, opacity: 0, stagger: .08, duration: 1.1, ease: 'expo.out' }, .1);
+    tl.add(setupScroll, $('.hero__man') ? '-=.6' : '>-.4');
   }
 
   /* ---------- scroll choreography ---------- */
@@ -349,7 +353,7 @@
     const desk = matchMedia('(min-width: 901px)').matches;
 
     // hero exit: name splits around him, halo spins away, he steps forward
-    if (!reduce) {
+    if (!reduce && $('.hero')) {
       const ht = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
       ht.to('.hero__layer--name .hn--l', { xPercent: -30, ease: 'none' }, 0)
         .to('.hero__layer--name .hn--r', { xPercent: 36, ease: 'none' }, 0)
@@ -367,7 +371,7 @@
     });
 
     // manifesto words + counters + rings
-    gsap.to('.manifesto .w', { opacity: 1, stagger: .02, ease: 'none', scrollTrigger: { trigger: '.manifesto__text', start: 'top 80%', end: 'bottom 45%', scrub: true } });
+    if ($('.manifesto__text')) gsap.to('.manifesto .w', { opacity: 1, stagger: .02, ease: 'none', scrollTrigger: { trigger: '.manifesto__text', start: 'top 80%', end: 'bottom 45%', scrub: true } });
     if ($('.stats')) ScrollTrigger.create({ trigger: '.stats', start: 'top 85%', once: true, onEnter: () => $('.stats').classList.add('is-in') });
     $$('.stat').forEach(st => {
       const el = $('[data-count]', st), ring = $('.ring__v', st), end = +el.dataset.count, dec = +(el.dataset.dec || 0), o = { v: 0 };
@@ -391,17 +395,21 @@
       .to({}, { duration: .6 }); }
 
     // generic reveals
-    $$('.sechead .eyebrow, .sechead__sub, .plist li, .offer, .stages__list li, .gantt__row, .coach__creds > div, .eps li, .links a, .hillcard, .countdown, .passport__head').forEach(el => {
+    $$('.sechead .eyebrow, .sechead__sub, .plist li, .offer, .stages__list li, .gantt__row, .coach__creds > div, .eps li, .links a, .hillcard, .countdown, .passport__head, .meet__side > *, .meet__body > *, .path, .proof__list li, .hpill__copy > :not(.h2), .hpill__list li, .hcta__panel > :not(.h2), .pnext__a').forEach(el => {
       gsap.from(el, { y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
     });
+    // proof numerals count in
+    $$('.proof__big').forEach(el => { const m = el.textContent.match(/^(\d+)(\+?)$/); if (!m) return; const end = +m[1], o = { v: end > 1000 ? end - 30 : 0 };
+      ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: () => gsap.to(o, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: () => el.textContent = Math.round(o.v) + m[2] }) }); });
     // image curtain reveals + face-anchored parallax
-    $$('.cs, .fp, .civic__img, .pod__cover').forEach(el => {
+    $$('.cs, .fp, .civic__img, .pod__cover, .hpill__img').forEach(el => {
       gsap.from(el, { clipPath: 'inset(0 0 100% 0 round 22px)', duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
       const im = $('img', el); if (im && !reduce) { im.style.scale = '1.06'; ScrollTrigger.create({ trigger: el, start: 'top bottom', end: 'bottom top', onUpdate: s => { im.style.translate = `0 ${(-(im._amp || 0) * s.progress).toFixed(1)}px`; } }); }
     });
     // BLE bg + footer drift + film zoom
-    gsap.fromTo('.ble__bg', { xPercent: 0 }, { xPercent: -40, ease: 'none', scrollTrigger: { trigger: '.ble', start: 'top bottom', end: 'bottom top', scrub: true } });
-    gsap.from('.film > .wrap > .film__frame', { scale: .86, ease: 'none', scrollTrigger: { trigger: '.film', start: 'top bottom', end: 'center center', scrub: true } });
+    if ($('.ble')) gsap.fromTo('.ble__bg', { xPercent: 0 }, { xPercent: -40, ease: 'none', scrollTrigger: { trigger: '.ble', start: 'top bottom', end: 'bottom top', scrub: true } });
+    if ($('.phead__word')) gsap.to('.phead__word', { xPercent: -12, ease: 'none', scrollTrigger: { trigger: '.phead', start: 'top top', end: 'bottom top', scrub: true } });
+    if ($('.film')) gsap.from('.film > .wrap > .film__frame', { scale: .86, ease: 'none', scrollTrigger: { trigger: '.film', start: 'top bottom', end: 'center center', scrub: true } });
 
     // hats: float, orbit on scroll, tilt with mouse
     const hats = $$('.hat');
@@ -459,7 +467,7 @@
     if ($('.give__hat')) { gsap.to('.give__hat', { y: 18, rotate: 6, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1 }); gsap.fromTo('.give__hat', { rotateY: -40 }, { rotateY: 30, ease: 'none', scrollTrigger: { trigger: '.give', start: 'top bottom', end: 'bottom top', scrub: 1 } }); }
 
     // story horizontal pin + connecting line
-    ScrollTrigger.matchMedia({
+    if ($('.story__track')) ScrollTrigger.matchMedia({
       '(min-width: 821px)': () => {
         const track = $('.story__track'), pbar = $('.story__progress i'), path = $('.story__path'), svgEl = $('.story__line'), chaps = $$('.chap');
         const build = () => {

@@ -16,12 +16,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Geist+Mono:wght@400;500&family=Geist:wght@300..700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero-cut.webp" imagesrcset="assets/img/hero-cut-s.webp 633w, assets/img/hero-cut.webp 1107w" imagesizes="(max-width: 900px) 92vw, 52vw">
-<link rel="stylesheet" href="assets/css/site.css?v=db10df01">
+<link rel="stylesheet" href="assets/css/site.css?v=94f2efbd">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Aaron T. McGee","honorificPrefix":"Dr.","jobTitle":"Leadership Educator and Executive Coach","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"Tennessee State University"},{"@type":"CollegeOrUniversity","name":"Lipscomb University"}],"sameAs":["https://www.instagram.com/draarontmcgee/","https://www.instagram.com/coachacontent/","https://www.instagram.com/fatherhoodisdope/","https://www.linkedin.com/in/aaronmcgee","https://substack.com/@draarontmcgee","https://www.youtube.com/@BigLeadershipEnergy"]}
 </script>
 </head>
-<body>
+<body class="page-index">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="seal" viewBox="0 0 200 200">
   <defs>
     <linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3c9"/><stop offset=".28" stop-color="#e9b949"/><stop offset=".55" stop-color="#9c6b1f"/><stop offset=".8" stop-color="#f6d77c"/><stop offset="1" stop-color="#b3832a"/></linearGradient>
@@ -49,24 +49,21 @@
 <div class="progress" aria-hidden="true"><i></i></div>
 
 <header class="nav">
-  <a class="nav__brand" href="#top" aria-label="Dr. Aaron T. McGee, home">
+  <a class="nav__brand" href="index.html" aria-label="Dr. Aaron T. McGee, home">
     <svg class="nav__seal"><use href="#seal"/></svg>
     <span>Dr. Aaron T. McGee</span>
   </a>
-  <nav class="nav__links" aria-label="Sections">
-    <a href="#story">Story</a><a href="#ble">Leadership</a><a href="#coach">Coach A</a><a href="#civic">Civic</a><a href="#podcast">Podcast</a><a href="#family">Family</a>
-  </nav>
-  <a class="btn btn--gold nav__cta" href="#connect">Work With Aaron</a>
+  <nav class="nav__links" aria-label="Pages"><a href="about.html">About</a><a href="work.html">Work</a><a href="impact.html">Impact</a><a href="media.html">Media</a><a href="connect.html">Connect</a></nav>
+  <a class="btn btn--gold nav__cta" href="connect.html">Work With Aaron</a>
   <button class="nav__menu" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
 </header>
 <div class="drawer" aria-hidden="true">
-  <a href="#story">Story</a><a href="#ble">Leadership</a><a href="#coach">Coach A</a><a href="#civic">Civic</a><a href="#podcast">Podcast</a><a href="#family">Family</a><a href="#give">Give</a><a href="#connect">Connect</a>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="work.html">Work</a><a href="impact.html">Impact</a><a href="media.html">Media</a><a href="connect.html">Connect</a>
 </div>
 
 <main id="top">
-
-<!-- HERO -->
-<section class="hero" aria-label="Introduction">
+<!-- 01 HERO -->
+<section class="hero hero--home" aria-label="Introduction">
   <video class="hero__film" src="assets/video/hero-loop.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
   <div class="hero__tint" aria-hidden="true"></div>
   <canvas class="hero__silk" aria-hidden="true"></canvas>
@@ -80,415 +77,114 @@
     </figure>
   </div>
   <div class="hero__floor" aria-hidden="true"></div>
-
   <div class="hero__ui">
     <div class="hero__left">
       <p class="hero__kicker mono"><span class="dot"></span> Nashville, Tennessee</p>
       <h1 class="hero__title"><em>Dr.</em> Aaron T. McGee</h1>
-      <p class="hero__fs mono"><span>Faith</span><i></i><span>Family</span><i></i><span>Fatherhood</span><i></i><span>Fitness</span><i></i><span>Education</span></p>
-      <p class="hero__sub">Executive &amp; Civic Leader, Leadership Educator, Coach, Speaker, Husband &amp; Father</p>
-      <p class="hero__lede">He works with who shows up and builds with what he has.</p>
-      <div class="hero__ctas">
-        <a class="btn btn--gold magnetic" href="#connect">Work With Aaron</a>
-        <a class="btn btn--ghost magnetic" href="#story"><span class="playdot"></span>His story</a>
-      </div>
-    </div>
-    <div class="hero__chips">
-      <div class="chip" data-depth="0.9"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11v4c0 1.5 2.5 3 5 3s5-1.5 5-3v-4"/><path d="M21 9v5"/></svg><div><b>EdD, 2026</b><span>Tennessee State University</span></div></div>
-      <div class="chip" data-depth="0.7"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M9.5 21V10M14.5 21V10M19 21V10M2 10h20L12 3 2 10z"/></svg><div><b>Secretary-Treasurer</b><span>Nashville Sports Authority</span></div></div>
-      <div class="chip" data-depth="1.1"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></svg><div><b>Coach A</b><span>NASM Certified Trainer</span></div></div>
-      <div class="chip" data-depth="0.6"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg><div><b>46 episodes</b><span>Fatherhood Is Dope</span></div></div>
-    </div>
-  </div>
-
-  <div class="hud mono" aria-label="Live status">
-    <div class="hud__cell"><span class="hud__k">Nashville</span><span class="hud__v" data-clock>--:--</span></div>
-    <div class="hud__cell hud__cell--wide"><span class="hud__k">Next on the hill</span><span class="hud__v"><span class="pulse"></span> Hill Sprints and Devotions <b data-next-short>dates on @coachacontent</b></span></div>
-    <a class="hud__cell hud__link" href="https://substack.com/@draarontmcgee" target="_blank" rel="noopener"><span class="hud__k">Writing</span><span class="hud__v">Read his Substack <b>↗</b></span></a>
-    <div class="hud__cell hud__scroll"><span class="hud__k">Scroll</span><span class="hud__v"><i class="scrollcue"></i></span></div>
-  </div>
-</section>
-
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>Faith</span><b>✦</b><span>Family</span><b>✦</b><span>Fatherhood</span><b>✦</b><span>Fitness</span><b>✦</b><span class="g">Education</span><b>✦</b><span>Faith</span><b>✦</b><span>Family</span><b>✦</b><span>Fatherhood</span><b>✦</b><span>Fitness</span><b>✦</b><span class="g">Education</span><b>✦</b>
-  </div>
-</div>
-
-<!-- MANIFESTO -->
-<section class="manifesto" id="about">
-  <div class="wrap">
-    <p class="eyebrow mono">01 / Who he is</p>
-    <p class="manifesto__text split">Born in Jackson, Mississippi, Aaron came to Nashville at ten and grew up in East Nashville, a proud product of Metro Nashville Public Schools. He found his voice on the stage and radio at Tennessee State and has spent more than 15 years in youth development, nonprofit leadership and civic engagement. Today he coaches leaders, trains bodies, helps steward Nashville's biggest public venues, and raises a family in Antioch that keeps him honest. <em>The common thread is simple: show up.</em></p>
-    <div class="stats">
-      <div class="stat"><svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/><circle class="ring__v" cx="60" cy="60" r="54" data-ring=".92"/></svg><div class="stat__num"><span class="stat__n" data-count="15">0</span><span class="stat__plus">+</span></div><span class="stat__l">years in youth development, nonprofit leadership and civic engagement</span></div>
-      <div class="stat"><svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/><circle class="ring__v" cx="60" cy="60" r="54" data-ring=".7"/></svg><div class="stat__num"><span class="stat__n" data-count="7">0</span></div><span class="stat__l">years on the Nashville Sports Authority board</span></div>
-      <div class="stat"><svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/><circle class="ring__v" cx="60" cy="60" r="54" data-ring=".84"/></svg><div class="stat__num"><span class="stat__pre">$</span><span class="stat__n" data-count="2.1" data-dec="1">0</span><span class="stat__plus">B</span></div><span class="stat__l">stadium bond issuance he helped approve</span></div>
-      <div class="stat"><svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/><circle class="ring__v" cx="60" cy="60" r="54" data-ring=".78"/></svg><div class="stat__num"><span class="stat__n" data-count="46">0</span></div><span class="stat__l">Fatherhood Is Dope episodes recorded</span></div>
-    </div>
-    <div class="research">
-      <div class="research__q">
-        <p class="eyebrow mono">The research</p>
-        <p class="research__t">His doctoral research looks at gaps in youth leadership skills, and at how co-governance structures in community organizations can <em>co-opt the very voices they are meant to elevate.</em></p>
-      </div>
-      <ul class="degrees">
-        <li><span class="mono">Ed.D.</span><b>Higher Education Leadership</b><em>Tennessee State University</em></li>
-        <li><span class="mono">M.A.</span><b>Civic Leadership</b><em>Lipscomb University</em></li>
-        <li><span class="mono">B.S.</span><b>Mass Communication</b><em>Tennessee State University</em></li>
-      </ul>
+      <p class="hero__fs mono"><span>Faith</span><i></i><span>Family</span><i></i><span>Fatherhood</span><i></i><span>Fitness</span></p>
+      <p class="hero__lede">Leadership educator, civic leader and founder of Big Leadership Energy. He works with who shows up and builds with what he has.</p>
+      <div class="hero__ctas"><a class="btn btn--gold magnetic" href="#meet">Meet Aaron</a></div>
     </div>
   </div>
 </section>
 
-<!-- FOUR Fs -->
-<section class="fours" aria-label="Faith, Family, Fatherhood, Fitness">
+<!-- 02 MEET AARON -->
+<section class="meet" id="meet">
+  <div class="wrap meet__grid">
+    <div class="meet__side">
+      <p class="eyebrow mono">02 / Meet Aaron</p>
+      <p class="meet__sig" aria-hidden="true">Aaron T. McGee</p>
+    </div>
+    <div class="meet__body">
+      <p class="meet__lead">Born in Jackson, Mississippi and raised in East Nashville, Aaron is a proud product of Metro Nashville Public Schools who found his voice on the stage and the radio at Tennessee State. <em>More than fifteen years later, he is still showing up for the city that raised him.</em></p>
+      <p class="meet__p">He coaches leaders, trains bodies, helps steward Nashville's public venues on the Sports Authority, and in 2026 became Dr. McGee. Through every title, faith and family set the pace.</p>
+      <div class="meet__links">
+        <a class="tlink" href="about.html">Read his full story <i>→</i></a>
+        <a class="tlink" href="about.html#journey">The doctoral journey <i>→</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 THE WORK -->
+<section class="hwork" id="work">
   <div class="wrap">
     <div class="sechead">
-      <p class="eyebrow mono">02 / The four pillars</p>
-      <h2 class="h2">Four words in his bio. <em>One way of living.</em></h2>
+      <p class="eyebrow mono">03 / The work</p>
+      <h2 class="h2">Three paths. <em>One purpose.</em></h2>
     </div>
-    <div class="fours__grid">
-      <article class="pillar" tabindex="0">
-        <img src="assets/img/unite.jpg" alt="Aaron walking with community members at the Unite Nashville prayer walk" loading="lazy" data-fit>
-        <div class="pillar__body"><svg class="pillar__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M6 8h12"/></svg><span class="pillar__n mono">F/01</span><h3>Faith</h3><p>Rooted in faith and servant leadership, he believes real change comes from leaders who understand their own power and use it to serve their communities. Philippians 4:13 is the verse he lives by.</p></div>
-      </article>
-      <article class="pillar" tabindex="0">
-        <img src="assets/img/terece-green.jpg" alt="Aaron in a green suit with his wife Terece in an evening gown" loading="lazy" data-fit>
-        <div class="pillar__body"><svg class="pillar__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M12 17s-3-1.8-3-3.6A1.6 1.6 0 0 1 12 12a1.6 1.6 0 0 1 3 1.4C15 15.2 12 17 12 17z"/></svg><span class="pillar__n mono">F/02</span><h3>Family</h3><p>Husband to Terece for more than eleven years. "My wife and my children were my anchor through every single moment," he says of the hardest season of his career.</p></div>
-      </article>
-      <article class="pillar" tabindex="0">
-        <img src="assets/img/dad.jpg" alt="Aaron hugging his two young children outdoors" loading="lazy" data-fit>
-        <div class="pillar__body"><svg class="pillar__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="6" r="2.4"/><circle cx="16.5" cy="9" r="1.8"/><path d="M8 9v12M5 13l3-3 3 3M16.5 12v9M14 16l2.5-2 2.5 2"/></svg><span class="pillar__n mono">F/03</span><h3>Fatherhood</h3><p>Fatherhood Is DOPE: Doing Our Part Everyday. He built a podcast and a brotherhood around engaged fathers, because "it ain't no hood like fatherhood."</p></div>
-      </article>
-      <article class="pillar" tabindex="0">
-        <img src="assets/img/nf-stand.jpg" alt="Aaron standing in a gym with arms crossed, photographed for Nashville Fit Magazine" loading="lazy" data-fit>
-        <div class="pillar__body"><svg class="pillar__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></svg><span class="pillar__n mono">F/04</span><h3>Fitness</h3><p>NASM certified personal trainer and the coach behind Hill Sprints and Devotions. "Big kids need P.E. too."</p></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- STORY -->
-<section class="story" id="story" aria-label="His story">
-  <div class="story__pin">
-    <div class="story__head wrap">
-      <p class="eyebrow mono">03 / The journey</p>
-      <h2 class="h2">From Jackson to Nashville to <em>Dr. McGee.</em></h2>
-      <div class="story__progress"><i></i></div>
-    </div>
-    <div class="story__track">
-      <svg class="story__line" aria-hidden="true" preserveAspectRatio="none"><path class="story__path"/></svg>
-      <article class="chap"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">Roots</span><div class="chap__img"><img src="assets/img/nashville-s.jpg" alt="Aaron with arms spread in front of a bright Nashville mural" data-fit></div><h3>Jackson to East Nashville</h3><p>Born in Jackson, Mississippi and raised in East Nashville from age ten. A proud Metro Nashville Public Schools graduate and class president of Maplewood High School's Class of 2005.</p></article>
-      <article class="chap"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">TSU</span><div class="chap__img"><img src="assets/img/homecoming-s.jpg" alt="Aaron on the field at a TSU game wearing a Big Blue Energy hoodie" data-fit></div><h3>Finding his voice</h3><p>Bachelor's in Mass Communication from Tennessee State University. The theater stage, the campus radio station and mentors who saw something in him first.</p></article>
-      <article class="chap"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">Service</span><div class="chap__img"><img src="assets/img/keynote-s.jpg" alt="Aaron delivering a keynote at a wooden podium" data-fit></div><h3>Youth first</h3><p>YMCA Black Achievers, the EducateME Foundation, then executive director of Youth Life Foundation of Tennessee. Later Vice President of Action, Advocacy and Education at Oasis Center.</p></article>
-      <article class="chap"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">2019</span><div class="chap__img"><img src="assets/img/bonds-s.jpg" alt="Aaron with fellow Sports Authority board members holding framed bond documents at Nissan Stadium" data-fit></div><h3>A seat at the table</h3><p>Appointed to the Metro Nashville Sports Authority, an officer since 2023 and today its Secretary-Treasurer. Part of the team that approved the bonds for the new enclosed stadium.</p></article>
-      <article class="chap"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">2020</span><div class="chap__img"><img src="assets/img/u40-s.jpg" alt="Aaron on a gold background for the TSU 40 Under Forty honors" data-fit></div><h3>40 Under Forty</h3><p>Honored by the TSU Young Alumni Network. The same year Fatherhood Is Dope closed out its second season with guests from RL of Next to Bryan Loritts.</p></article>
-      <article class="chap"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">2022</span><div class="chap__img"><img src="assets/img/gold-hat-s.jpg" alt="Aaron in a gold Big Leadership Energy trucker hat" data-fit></div><h3>Big Leadership Energy</h3><p>Founds Big Leadership Energy in March, a social enterprise developing leaders through voice and clarity, and begins doctoral study in Higher Education Leadership at TSU.</p></article>
-      <article class="chap"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">2024</span><div class="chap__img"><img src="assets/img/tsu-cardigan-s.jpg" alt="Aaron presenting in a TSU cardigan and Big Leadership Energy cap" data-fit></div><h3>Graduate Class President</h3><p>Elected to lead TSU's graduate students. As a University Innovation Fellow he delivers his first international workshop and studies design thinking at the University of Twente.</p></article>
-      <article class="chap"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">2025</span><div class="chap__img"><img src="assets/img/nf-curl-s.jpg" alt="Aaron doing cable curls in a gym" data-fit></div><h3>Setback into purpose</h3><p>A November 2024 layoff became a turning point. TruFit Athletics Club took a chance on him, and he earned his NASM personal trainer certification. Coach A was born.</p></article>
-      <article class="chap chap--gold"><span class="chap__node" aria-hidden="true"></span><span class="chap__yr">2026</span><div class="chap__img"><img src="assets/img/studio-s.jpg" alt="Studio portrait of Dr. Aaron T. McGee in a navy suit" data-fit></div><h3>Dr. Aaron T. McGee</h3><p>Featured in Nashville Fit Magazine, published in The HBCU Experience, re-elected Sports Authority Secretary-Treasurer, and conferred his doctorate.</p></article>
+    <div class="paths">
+      <a class="path" href="work.html#ble">
+        <span class="path__top"><span class="path__n mono">01</span><svg class="path__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg></span>
+        <h3>Big Leadership Energy</h3>
+        <p class="path__k mono">Speaking and coaching</p>
+        <p>Keynotes, workshops, coaching and curriculum that help leaders define their voice with clarity and purpose.</p>
+        <span class="path__go">Explore the work <i>→</i></span>
+      </a>
+      <a class="path" href="work.html#coach">
+        <span class="path__top"><span class="path__n mono">02</span><svg class="path__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></svg></span>
+        <h3>Coach A</h3>
+        <p class="path__k mono">Fitness</p>
+        <p>NASM certified, mobile and faith driven personal training, plus Hill Sprints and Devotions at the State Capitol.</p>
+        <span class="path__go">Train with Coach A <i>→</i></span>
+      </a>
+      <a class="path" href="impact.html">
+        <span class="path__top"><span class="path__n mono">03</span><svg class="path__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M9.5 21V10M14.5 21V10M19 21V10M2 10h20L12 3 2 10z"/></svg></span>
+        <h3>Civic &amp; Community Impact</h3>
+        <p class="path__k mono">Service</p>
+        <p>Secretary-Treasurer of the Nashville Sports Authority and a board leader for schools, mental health and his alma maters.</p>
+        <span class="path__go">See the impact <i>→</i></span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- FILM -->
-<section class="film" aria-label="Video">
-  <div class="wrap">
-    <div class="film__frame" data-film data-cursor="Play">
-      <video class="film__video" playsinline muted loop preload="none" poster="assets/img/hosting-poster.jpg" data-src="assets/video/hosting-reel.mp4"></video>
-      <button class="film__play" aria-label="Play the hosting reel with sound"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-      <div class="film__cap"><span class="mono">Hosting reel / 1:13</span><b>Dr. McGee hosting the Advancing Black Professionals Summit</b></div>
-      <div class="film__corner mono">Advancing Black Professionals Summit</div>
-    </div>
-  </div>
-</section>
+<div class="kwrap"><div class="kinetic kinetic--home" aria-hidden="true"><div class="kinetic__track"><span>People</span><b>✦</b><span class="o">Progress</span><b>✦</b><span>Possibility</span><b>✦</b><span class="o">People</span><b>✦</b><span>Progress</span><b>✦</b><span class="o">Possibility</span><b>✦</b></div></div></div>
 
-<!-- BIG LEADERSHIP ENERGY -->
-<section class="ble" id="ble">
-  <div class="ble__bg" aria-hidden="true">BIG LEADERSHIP ENERGY</div>
-  <div class="wrap">
-    <div class="ble__top">
-      <div class="sechead">
-        <p class="eyebrow mono">04 / Work with Dr. McGee</p>
-        <h2 class="h2">Voice. Clarity. <em>Authentic presence.</em></h2>
-        <p class="sechead__sub">Founded in March 2022, Big Leadership Energy is Dr. McGee's social enterprise and cultural platform. It helps young leaders build self-efficacy, advocate authentically, and define their voice with clarity and purpose, and it uses storytelling to share the stories of leaders across generations.</p>
-      </div>
-      <div class="hats" aria-label="Big Leadership Energy trucker hats">
-        <div class="hats__glow" aria-hidden="true"></div>
-        <img class="hat hat--black" src="assets/img/hat-black.webp" alt="Black Big Leadership Energy trucker hat" loading="lazy">
-        <img class="hat hat--gold" src="assets/img/hat-gold.webp" alt="Gold Big Leadership Energy trucker hat" loading="lazy">
-        <img class="hat hat--blue" src="assets/img/hat-blue.webp" alt="Blue Big Blue Energy trucker hat with the TSU logo" loading="lazy">
-        <span class="hats__tag mono">Big Leadership Energy</span>
-      </div>
-    </div>
-    <div class="pitch">
-      <div class="film__frame pitch__frame" data-film data-cursor="Play">
-        <video class="film__video" playsinline muted loop preload="none" poster="assets/img/pitch-poster.jpg" data-src="assets/video/ble-pitch.mp4"><track kind="captions" src="assets/video/ble-pitch.vtt" srclang="en" label="English" default></video>
-        <button class="film__play" aria-label="Play the Big Leadership Energy pitch with sound"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-        <div class="film__cap"><span class="mono">The pitch / 2:16</span><b>"The future of leadership is in this room. Will you help shape it?"</b></div>
-      </div>
-      <div class="framework">
-        <p class="eyebrow mono">The Big Leadership Energy Framework</p>
-        <p class="framework__lede">A holistic approach that addresses the entire leader, rooted in four pillars.</p>
-        <ul class="framework__list" style="list-style:none;padding:0">
-          <li><span class="mono">01</span><b>Self-efficacy</b></li>
-          <li><span class="mono">02</span><b>Self-advocacy</b></li>
-          <li><span class="mono">03</span><b>Communication</b></li>
-          <li><span class="mono">04</span><b>Collaboration</b></li>
-        </ul>
-        <p class="framework__note mono">Working with organizations, schools and community groups, from Nashville to the Netherlands</p>
-      </div>
-    </div>
-    <div class="offers">
-      <article class="offer tilt"><svg class="offer__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg><span class="offer__n mono">01</span><h3>Leadership coaching</h3><p>For student leaders and emerging professionals ready to build self-efficacy, advocate authentically and lead with a clear voice.</p><a class="offer__link" href="#connect" data-topic="Executive coaching">Start a conversation <i>→</i></a></article>
-      <article class="offer tilt"><svg class="offer__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg><span class="offer__n mono">02</span><h3>Workshops and keynotes</h3><p>From "Design Your Voice: Unleashing Big Leadership Energy through Strategic Communication" to graduation stages and summit panels, in Nashville and beyond.</p><a class="offer__link" href="#connect" data-topic="Keynote or workshop">Book a talk <i>→</i></a></article>
-      <article class="offer tilt"><svg class="offer__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.3c3 .3 5.5 2.6 5.5 5.7"/></svg><span class="offer__n mono">03</span><h3>Curriculum design</h3><p>Leadership curriculum for universities, student programs and community organizations, built on his research and more than 15 years in the field.</p><a class="offer__link" href="#connect" data-topic="Student leadership program">Design with him <i>→</i></a></article>
-      <article class="offer tilt"><svg class="offer__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></svg><span class="offer__n mono">04</span><h3>Train with Coach A</h3><p>Mobile, faith-driven personal training. He travels to his clients and meets them where they are, with effort over excuses.</p><a class="offer__link" href="https://docs.google.com/forms/d/e/1FAIpQLSfXJ8X403QfrKcivxJduT0q76h0sbDaFbv96a8ESToAEb6Syw/viewform" target="_blank" rel="noopener">Train with Coach A <i>→</i></a></article>
-    </div>
-  </div>
-  <div class="kinetic" aria-hidden="true"><div class="kinetic__track"><span>I want to see you win</span><b>✦</b><span class="o">I want to see you win</span><b>✦</b><span>I want to see you win</span><b>✦</b><span class="o">I want to see you win</span><b>✦</b></div></div>
-  <div class="wrap">
-    <div class="stages">
-      <p class="eyebrow mono">Stages and rooms</p>
-      <ul class="stages__list">
-        <li data-img="assets/img/fwf-s.jpg"><b>Future Way Forward Conference</b><span>National Museum of African American Music, 2026 panelist</span></li>
-        <li data-img="assets/img/fireside-s.jpg"><b>Scale Up Business Conference</b><span>Fireside chat with Patrick H. Johnson of The NXT Room, 2024</span></li>
-        <li data-img="assets/img/tsu-cardigan-s.jpg"><b>University Innovation Fellows</b><span>First international workshop, Stanford d.school network</span></li>
-        <li data-img="assets/img/abps-s.jpg"><b>Career Thrivers</b><span>Advancing Black Professionals Summit</span></li>
-        <li data-img="assets/img/pivot-s.jpg"><b>Pivot Technology School</b><span>Graduation guest speaker</span></li>
-        <li data-img="assets/img/keynote-s.jpg"><b>YMCA Black Achievers</b><span>Keynote, 25th Annual Scholarship Banquet</span></li>
-        <li data-img="assets/img/patfacts-s.jpg"><b>Nashville Public Library</b><span>Host, Patfacts Literacy Luncheon</span></li>
-        <li data-img="assets/img/harvard-s.jpg"><b>Harvard Business School</b><span>African American Student Union conference</span></li>
-      </ul>
-      <div class="stages__peek" aria-hidden="true"><img alt=""></div>
-    </div>
-    <div class="ble__media ble__media--solo">
-      <figure class="ble__quote">
-        <blockquote>"I work with who shows up. I work with what I have."</blockquote>
-        <figcaption class="mono">Dr. Aaron T. McGee, on the two principles behind his career</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- COACH A -->
-<section class="coach" id="coach">
-  <div class="wrap coach__grid">
-    <div class="coach__copy">
-      <p class="eyebrow mono">05 / Coach A</p>
-      <h2 class="h2">Faster. Stronger. <em>Together.</em></h2>
-      <p>Twice a month, before the city wakes up, Coach A meets whoever shows up at the Tennessee State Capitol for Hill Sprints and Devotions. A guest faith partner brings the word, Coach A brings the workout, and everyone is back to their weekend before 7:30 a.m.</p>
-    </div>
-    <div class="coach__stack" aria-label="Photos from Hill Sprints and training">
-      <figure class="cs cs--1"><img src="assets/img/coach-1.jpg" alt="Coach A in a blue training shirt with arms crossed in a gym" loading="lazy" data-fit></figure>
-      <figure class="cs cs--2"><img src="assets/img/coach-2.jpg" alt="Coach A guiding a client through a cable exercise" loading="lazy" data-fit></figure>
-      <figure class="cs cs--3"><img src="assets/img/coach-3.jpg" alt="Hill Sprints and Devotions group on the lawn below the Tennessee State Capitol" loading="lazy" data-fit></figure>
-      <div class="gchip gchip--a"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><div><b>Faith + fitness</b><span>A word, then the work</span></div></div>
-      <div class="gchip gchip--b"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg><div><b>6:30 a.m.</b><span>1st and 3rd Saturdays</span></div></div>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="countdown" aria-live="polite">
-      <div class="countdown__left">
-        <p class="mono countdown__k"><span class="pulse"></span> Next session</p>
-        <p class="countdown__date" data-next-long>Saturday, 6:30 a.m.</p>
-        <p class="countdown__where">Tennessee State Capitol, 600 Charlotte Ave. Park at the base on James Robertson Parkway or at the top off Charlotte Pike. Lineups on <a href="https://www.instagram.com/coachacontent/" target="_blank" rel="noopener">@coachacontent</a>.</p>
-      </div>
-      <div class="countdown__units">
-        <div><b data-cd="d">00</b><span class="mono">days</span></div>
-        <div><b data-cd="h">00</b><span class="mono">hrs</span></div>
-        <div><b data-cd="m">00</b><span class="mono">min</span></div>
-        <div><b data-cd="s">00</b><span class="mono">sec</span></div>
-      </div>
-      <svg class="ecg" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 H170 L185 30 L195 8 L207 52 L219 22 L228 30 H380 L395 30 L405 8 L417 52 L429 22 L438 30 H600"/></svg>
-      <div class="countdown__ctas">
-        <a class="btn btn--gold magnetic" href="https://docs.google.com/forms/d/e/1FAIpQLSfXJ8X403QfrKcivxJduT0q76h0sbDaFbv96a8ESToAEb6Syw/viewform" target="_blank" rel="noopener">Train with Coach A</a>
-        <a class="btn btn--ghost magnetic" href="https://maps.google.com/?q=Tennessee+State+Capitol+600+Charlotte+Ave+Nashville" target="_blank" rel="noopener">Get directions</a>
-        <button class="btn btn--ghost magnetic" data-ics>Add to calendar</button>
-      </div>
-    </div>
-    <div class="coach__creds">
-      <div><b>NASM-CPT</b><span>Certified Personal Trainer, 2025</span></div>
-      <div><b>Mobile</b><span>He comes to you, across Nashville</span></div>
-      <div><b>Faith driven</b><span>"Inspire hope in the hopeless"</span></div>
-      <div><b>All levels</b><span>Former athletes to first-timers</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- CIVIC -->
-<section class="civic" id="civic">
-  <svg class="skyline" viewBox="0 0 1436 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-  <defs><linearGradient id="skg" x1="0" x2="1"><stop offset="0" stop-color="#7a5a26"/><stop offset=".5" stop-color="#a8823f"/><stop offset="1" stop-color="#7a5a26"/></linearGradient>
-  <linearGradient id="skf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(150,114,56,.10)"/><stop offset="1" stop-color="rgba(150,114,56,0)"/></linearGradient></defs>
-  <path class="skyline__fill" d="M0,260 L0,200 L60,200 L60,260 L60,170 L100,170 L100,260 L100,242 Q130.0,220 152.5,214 L163.0,214 L163.0,180 L169.0,180 L169.0,158 L175.0,140 L181.0,158 L181.0,180 L187.0,180 L187.0,214 L197.5,214 Q220.0,220 250,242 L250,260 L250,220 L280,220 L280,260 L280,150 L330,150 L330,260 L330,140 L348.0,110 L366,140 L366,260 L366,130 L426,130 L426,260 L426,90 L470,90 L470,260 L470,80 L491.6,62 L496.4,10 L506.0,58 L554.0,58 L563.6,10 L568.4,62 L590,80 L590,260 L590,70 L640,70 L640,260 L640,120 L680,120 L680,260 L680,55 L736,55 L736,260 L736,140 L774,140 L774,260 L774,130 L809.0,100 L844,130 L844,260 L844,160 L890,160 L890,260 L890,180 L950,180 L950,260 L950,230 Q1060.0,160 1170,230 L1170,260 L1170,200 L1220,200 L1220,260 L1220,165 L1260,165 L1260,260 L1260,130 L1320,130 L1320,260 L1320,180 L1356,180 L1356,260 L1356,210 L1436,210 L1436,260 L1436,260 L1600,260 Z" fill="url(#skf)"/>
-  <path class="skyline__line draw" d="M0,260 L0,200 L60,200 L60,260 L60,170 L100,170 L100,260 L100,242 Q130.0,220 152.5,214 L163.0,214 L163.0,180 L169.0,180 L169.0,158 L175.0,140 L181.0,158 L181.0,180 L187.0,180 L187.0,214 L197.5,214 Q220.0,220 250,242 L250,260 L250,220 L280,220 L280,260 L280,150 L330,150 L330,260 L330,140 L348.0,110 L366,140 L366,260 L366,130 L426,130 L426,260 L426,90 L470,90 L470,260 L470,80 L491.6,62 L496.4,10 L506.0,58 L554.0,58 L563.6,10 L568.4,62 L590,80 L590,260 L590,70 L640,70 L640,260 L640,120 L680,120 L680,260 L680,55 L736,55 L736,260 L736,140 L774,140 L774,260 L774,130 L809.0,100 L844,130 L844,260 L844,160 L890,160 L890,260 L890,180 L950,180 L950,260 L950,230 Q1060.0,160 1170,230 L1170,260 L1170,200 L1220,200 L1220,260 L1220,165 L1260,165 L1260,260 L1260,130 L1320,130 L1320,260 L1320,180 L1356,180 L1356,260 L1356,210 L1436,210 L1436,260 L1436,260 L1600,260" fill="none" stroke="url(#skg)" stroke-width="1.6" stroke-linejoin="round"/>
-  <g class="skyline__win" fill="#9a7535"><rect x="465" y="131" width="2" height="2"/><rect x="935" y="120" width="2" height="2"/><rect x="770" y="161" width="2" height="2"/><rect x="83" y="181" width="2" height="2"/><rect x="54" y="171" width="2" height="2"/><rect x="100" y="123" width="2" height="2"/><rect x="610" y="226" width="2" height="2"/><rect x="178" y="141" width="2" height="2"/><rect x="901" y="243" width="2" height="2"/><rect x="829" y="166" width="2" height="2"/><rect x="1402" y="117" width="2" height="2"/><rect x="1233" y="151" width="2" height="2"/><rect x="207" y="126" width="2" height="2"/><rect x="443" y="224" width="2" height="2"/><rect x="260" y="191" width="2" height="2"/><rect x="917" y="162" width="2" height="2"/><rect x="787" y="119" width="2" height="2"/><rect x="86" y="139" width="2" height="2"/><rect x="977" y="170" width="2" height="2"/><rect x="451" y="192" width="2" height="2"/><rect x="651" y="152" width="2" height="2"/><rect x="1141" y="208" width="2" height="2"/><rect x="351" y="190" width="2" height="2"/><rect x="754" y="233" width="2" height="2"/><rect x="1047" y="150" width="2" height="2"/><rect x="1408" y="127" width="2" height="2"/><rect x="600" y="216" width="2" height="2"/><rect x="218" y="178" width="2" height="2"/><rect x="56" y="204" width="2" height="2"/><rect x="1098" y="190" width="2" height="2"/><rect x="1257" y="154" width="2" height="2"/><rect x="998" y="193" width="2" height="2"/><rect x="833" y="174" width="2" height="2"/><rect x="1206" y="242" width="2" height="2"/><rect x="681" y="203" width="2" height="2"/><rect x="87" y="208" width="2" height="2"/><rect x="929" y="249" width="2" height="2"/><rect x="1180" y="150" width="2" height="2"/><rect x="554" y="204" width="2" height="2"/><rect x="32" y="175" width="2" height="2"/><rect x="241" y="126" width="2" height="2"/><rect x="85" y="218" width="2" height="2"/><rect x="186" y="145" width="2" height="2"/><rect x="561" y="232" width="2" height="2"/><rect x="116" y="173" width="2" height="2"/><rect x="789" y="234" width="2" height="2"/><rect x="1176" y="231" width="2" height="2"/><rect x="400" y="168" width="2" height="2"/><rect x="515" y="234" width="2" height="2"/><rect x="1375" y="131" width="2" height="2"/><rect x="253" y="142" width="2" height="2"/><rect x="335" y="178" width="2" height="2"/><rect x="846" y="147" width="2" height="2"/><rect x="6" y="169" width="2" height="2"/><rect x="530" y="189" width="2" height="2"/><rect x="1369" y="207" width="2" height="2"/><rect x="740" y="196" width="2" height="2"/><rect x="971" y="118" width="2" height="2"/><rect x="1292" y="219" width="2" height="2"/><rect x="1256" y="222" width="2" height="2"/><rect x="563" y="166" width="2" height="2"/><rect x="149" y="199" width="2" height="2"/><rect x="89" y="119" width="2" height="2"/><rect x="300" y="133" width="2" height="2"/><rect x="488" y="117" width="2" height="2"/><rect x="0" y="131" width="2" height="2"/><rect x="146" y="161" width="2" height="2"/><rect x="37" y="232" width="2" height="2"/><rect x="882" y="131" width="2" height="2"/><rect x="362" y="159" width="2" height="2"/><rect x="523" y="127" width="2" height="2"/><rect x="1219" y="249" width="2" height="2"/><rect x="669" y="178" width="2" height="2"/><rect x="123" y="124" width="2" height="2"/><rect x="492" y="147" width="2" height="2"/><rect x="1190" y="133" width="2" height="2"/><rect x="33" y="243" width="2" height="2"/><rect x="759" y="131" width="2" height="2"/><rect x="780" y="114" width="2" height="2"/><rect x="758" y="247" width="2" height="2"/><rect x="1240" y="207" width="2" height="2"/><rect x="375" y="161" width="2" height="2"/><rect x="240" y="218" width="2" height="2"/><rect x="765" y="219" width="2" height="2"/><rect x="473" y="141" width="2" height="2"/><rect x="1165" y="248" width="2" height="2"/><rect x="1224" y="223" width="2" height="2"/><rect x="1175" y="214" width="2" height="2"/><rect x="326" y="182" width="2" height="2"/><rect x="511" y="114" width="2" height="2"/><rect x="40" y="149" width="2" height="2"/><rect x="372" y="207" width="2" height="2"/><rect x="1374" y="173" width="2" height="2"/><rect x="1346" y="248" width="2" height="2"/><rect x="1371" y="161" width="2" height="2"/><rect x="317" y="142" width="2" height="2"/><rect x="282" y="139" width="2" height="2"/><rect x="896" y="236" width="2" height="2"/><rect x="1207" y="177" width="2" height="2"/><rect x="938" y="222" width="2" height="2"/><rect x="122" y="202" width="2" height="2"/><rect x="1306" y="220" width="2" height="2"/><rect x="1077" y="177" width="2" height="2"/><rect x="256" y="220" width="2" height="2"/><rect x="477" y="222" width="2" height="2"/><rect x="1395" y="165" width="2" height="2"/><rect x="576" y="243" width="2" height="2"/><rect x="1041" y="134" width="2" height="2"/><rect x="182" y="131" width="2" height="2"/><rect x="1299" y="223" width="2" height="2"/><rect x="210" y="226" width="2" height="2"/><rect x="1408" y="202" width="2" height="2"/><rect x="503" y="187" width="2" height="2"/><rect x="188" y="112" width="2" height="2"/><rect x="1394" y="201" width="2" height="2"/><rect x="756" y="241" width="2" height="2"/><rect x="623" y="232" width="2" height="2"/><rect x="1186" y="140" width="2" height="2"/><rect x="362" y="151" width="2" height="2"/><rect x="345" y="192" width="2" height="2"/><rect x="372" y="169" width="2" height="2"/><rect x="188" y="237" width="2" height="2"/><rect x="508" y="174" width="2" height="2"/><rect x="838" y="237" width="2" height="2"/><rect x="604" y="238" width="2" height="2"/><rect x="720" y="184" width="2" height="2"/><rect x="752" y="113" width="2" height="2"/><rect x="632" y="136" width="2" height="2"/><rect x="6" y="222" width="2" height="2"/><rect x="247" y="176" width="2" height="2"/><rect x="1041" y="188" width="2" height="2"/><rect x="468" y="183" width="2" height="2"/><rect x="798" y="220" width="2" height="2"/><rect x="152" y="188" width="2" height="2"/><rect x="357" y="149" width="2" height="2"/><rect x="1109" y="181" width="2" height="2"/><rect x="807" y="216" width="2" height="2"/><rect x="1310" y="172" width="2" height="2"/><rect x="880" y="181" width="2" height="2"/><rect x="735" y="207" width="2" height="2"/></g>
-</svg>
-  <div class="wrap">
-    <div class="sechead">
-      <p class="eyebrow mono">06 / Civic leadership</p>
-      <h2 class="h2">Building the city <em>that raised him.</em></h2>
-    </div>
-    <div class="civic__feature">
-      <figure class="civic__img"><img src="assets/img/preds.jpg" alt="Aaron seated at a press table in front of Nashville Predators and Ford Ice Center branding" loading="lazy" data-fit>
-      </figure>
-      <div class="civic__copy">
-        <p class="big">"I was part of the team that approved the bond issuance for the new $2.1 billion enclosed Titans stadium, a decision made by a board committed to investing in Nashville's future without placing the burden on homeowners."</p>
-        <p class="mono small">On serving as Secretary-Treasurer and finance committee member, Nashville Sports Authority</p>
-      </div>
-    </div>
-    <div class="gantt">
-      <div class="gantt__head"><p class="eyebrow mono">Years at the table</p><p class="gantt__note">Today he is also a Senior Operations Manager at an organization committed to social justice and community organizing.</p></div>
-      <ol class="gantt__rows"><li class="gantt__row"><div class="gantt__label"><span class="mono">Secretary-Treasurer</span><b>Metro Nashville Sports Authority</b></div><div class="gantt__lane"><i class="gantt__bar is-now" style="--l:63.64%;--w:35.91%"><em class="mono">Board since 2019, officer since 2023</em></i></div></li><li class="gantt__row"><div class="gantt__label"><span class="mono">Alumni Class President</span><b>Maplewood High School, Class of 2005</b></div><div class="gantt__lane"><i class="gantt__bar is-now" style="--l:0.00%;--w:99.55%"><em class="mono">Class president since 2005</em></i></div></li><li class="gantt__row"><div class="gantt__label"><span class="mono">Board Member, Parent Rep.</span><b>Aventura Community School</b></div><div class="gantt__lane"><i class="gantt__bar is-now" style="--l:77.27%;--w:22.27%"><em class="mono">Since 2022</em></i></div></li><li class="gantt__row"><div class="gantt__label"><span class="mono">Board Chair</span><b>Middle Tennessee Mental Health Institute</b></div><div class="gantt__lane"><i class="gantt__bar" style="--l:72.73%;--w:19.55%"><em class="mono">2021 to 2025</em></i></div></li><li class="gantt__row"><div class="gantt__label"><span class="mono">Committee Member</span><b>TSU National Alumni Association</b></div><div class="gantt__lane"><i class="gantt__bar" style="--l:68.18%;--w:24.09%"><em class="mono">2020 to 2025</em></i></div></li><li class="gantt__row"><div class="gantt__label"><span class="mono">Commissioner</span><b>Nashville Community Education Commission</b></div><div class="gantt__lane"><i class="gantt__bar" style="--l:59.09%;--w:4.55%"><em class="mono">Appointed 2018</em></i></div></li><li class="gantt__row"><div class="gantt__label"><span class="mono">Fellow</span><b>New Leaders Council Nashville</b></div><div class="gantt__lane"><i class="gantt__bar" style="--l:36.36%;--w:4.09%"><em class="mono">Class of 2013</em></i></div></li></ol>
-      <div class="gantt__axis mono"><div></div><div class="gantt__ticks"><span style="--l:0.00%">2005</span><span style="--l:18.18%">2009</span><span style="--l:36.36%">2013</span><span style="--l:54.55%">2017</span><span style="--l:72.73%">2021</span><span style="--l:90.91%">2025</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PODCAST -->
-<section class="pod" id="podcast">
-  <div class="wrap pod__grid">
-    <div class="pod__art">
-      <div class="vinyl" aria-hidden="true"><div class="vinyl__label"><img src="assets/img/fid-s.jpg" alt=""></div></div>
-      <img class="pod__cover" src="assets/img/fid.jpg" alt="Fatherhood Is Dope, The Podcast cover art with host Aaron McGee at a microphone" loading="lazy">
-      <div class="wave" aria-hidden="true"><i style="--h:0.39;--d:1.04s"></i><i style="--h:0.50;--d:1.08s"></i><i style="--h:0.70;--d:0.65s"></i><i style="--h:0.21;--d:1.27s"></i><i style="--h:0.41;--d:0.79s"></i><i style="--h:1.00;--d:0.98s"></i><i style="--h:0.87;--d:0.98s"></i><i style="--h:0.71;--d:0.72s"></i><i style="--h:0.71;--d:1.29s"></i><i style="--h:0.62;--d:1.19s"></i><i style="--h:0.74;--d:0.65s"></i><i style="--h:0.81;--d:1.07s"></i><i style="--h:0.44;--d:0.62s"></i><i style="--h:0.89;--d:0.98s"></i><i style="--h:0.78;--d:1.30s"></i><i style="--h:0.77;--d:1.34s"></i><i style="--h:0.52;--d:1.24s"></i><i style="--h:0.56;--d:1.35s"></i><i style="--h:0.90;--d:0.68s"></i><i style="--h:0.31;--d:0.77s"></i><i style="--h:0.97;--d:0.95s"></i><i style="--h:0.70;--d:0.84s"></i><i style="--h:0.61;--d:0.91s"></i><i style="--h:0.48;--d:1.07s"></i><i style="--h:0.67;--d:1.32s"></i><i style="--h:0.75;--d:1.34s"></i><i style="--h:0.89;--d:1.39s"></i><i style="--h:0.74;--d:0.73s"></i><i style="--h:0.89;--d:1.37s"></i><i style="--h:0.92;--d:1.06s"></i><i style="--h:0.77;--d:0.77s"></i><i style="--h:0.87;--d:1.06s"></i><i style="--h:0.43;--d:0.65s"></i><i style="--h:0.88;--d:1.39s"></i><i style="--h:0.27;--d:1.24s"></i><i style="--h:0.53;--d:0.72s"></i><i style="--h:0.44;--d:1.22s"></i><i style="--h:0.90;--d:0.64s"></i><i style="--h:0.69;--d:0.64s"></i><i style="--h:0.77;--d:0.86s"></i><i style="--h:0.90;--d:1.38s"></i><i style="--h:0.60;--d:1.40s"></i><i style="--h:0.45;--d:0.66s"></i><i style="--h:0.68;--d:0.63s"></i></div>
-    </div>
-    <div class="pod__copy">
-      <p class="eyebrow mono">07 / The podcast</p>
-      <h2 class="h2">Fatherhood Is <em>DOPE.</em></h2>
-      <p>Doing Our Part Everyday. Forty-six conversations with fathers, coaches, pastors, artists and organizers about what it takes to show up at home. Aaron's wife Terece joined him for the Mother's Day episode.</p>
-      <ul class="eps">
-        <li data-yt-open="TEJmV1FMyYI"><span class="mono">S2 E12</span><b>RL of Next</b><em>talks fatherhood and sings to his mom</em><i class="eps__play"></i></li>
-        <li data-yt-open="j9UizsoLRTU"><span class="mono">S2 E17</span><b>Bryan Loritts</b><em>the four most important gifts you can give your kids</em><i class="eps__play"></i></li>
-        <li data-yt-open="miyjAGDPe-s"><span class="mono">S2 E15</span><b>Germar Gardner</b><em>Orange Is the New Black actor on fatherhood</em><i class="eps__play"></i></li>
-        <li data-yt-open="XPa40VGPXZI"><span class="mono">S2 E13</span><b>The State of Black Fatherhood</b><em>DJ Pryor, James Shaw Jr., Ivon Hickmon</em><i class="eps__play"></i></li>
-        <li data-yt-open="FJ8RAyogH1o"><span class="mono">S2 E14</span><b>L. Mychal Bogee</b><em>the hip-hop ABCs of raising a daughter</em><i class="eps__play"></i></li>
-        <li data-yt-open="I5cyYj0CXxw"><span class="mono">S2 E16</span><b>Courtney Hale</b><em>having the money talk with kids</em><i class="eps__play"></i></li>
-      </ul>
-      <div class="row">
-        <a class="pill" href="https://open.spotify.com/show/5Y0h83FWycS0WRkTmCkFGz" target="_blank" rel="noopener">Spotify</a>
-        <a class="pill" href="https://podcasts.apple.com/us/podcast/fatherhood-is-dope/id1454701482" target="_blank" rel="noopener">Apple Podcasts</a>
-        <a class="pill" href="https://youtube.com/playlist?list=PL8NPTx3E85BNyXIZTjRAbR9P3syt7KY2q" target="_blank" rel="noopener">YouTube</a>
-        <a class="pill" href="https://www.instagram.com/fatherhoodisdope/" target="_blank" rel="noopener">@fatherhoodisdope</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MEDIA -->
-<section class="media" id="media">
-  <div class="wrap">
-    <div class="sechead">
-      <p class="eyebrow mono">08 / In print and on air</p>
-      <h2 class="h2">In print, on air <em>and on stage.</em></h2>
-    </div>
-  </div>
-  <div class="wrap">
-    <ul class="plist" aria-label="Press, books and podcast appearances"><li><a href="https://nashvillefitmagazine.com/fit-friday-feature-aaron-mcgee-turns-setback-into-training-empire/" target="_blank" rel="noopener"><span class="plist__kind mono">Magazine</span><span class="plist__src"><b>Nashville Fit Magazine</b><em class="mono">March / April 2026</em></span><span class="plist__title">Aaron McGee turns setback into purpose</span><span class="plist__go mono">Read ↗</span></a></li><li><a href="https://www.amazon.com/s?k=The+HBCU+Experience+Tennessee+State+University+2nd+Edition" target="_blank" rel="noopener"><span class="plist__kind mono">Book</span><span class="plist__src"><b>The HBCU Experience: TSU 2nd Edition</b><em class="mono">Contributing author</em></span><span class="plist__title">Crafting a Legacy of Big Leadership Energy at Tennessee State University</span><span class="plist__go mono">Read ↗</span></a></li><li><a href="https://www.youtube.com/watch?v=qiHwTMs-eHA" target="_blank" rel="noopener"><span class="plist__kind mono">Video</span><span class="plist__src"><b>Scale Up Business Conference</b><em class="mono">2024</em></span><span class="plist__title">Fireside chat with Patrick H. Johnson: turning vision into reality</span><span class="plist__go mono">Watch ↗</span></a></li><li><a href="https://podcasts.apple.com/fi/podcast/my-manhood-matters/id1809837582" target="_blank" rel="noopener"><span class="plist__kind mono">Podcast</span><span class="plist__src"><b>My Manhood Matters</b><em class="mono">2025</em></span><span class="plist__title">Unmasking manhood: accountability, mentorship and fatherhood</span><span class="plist__go mono">Listen ↗</span></a></li><li><a href="https://jasmineksweet.com/black-love-is-history/" target="_blank" rel="noopener"><span class="plist__kind mono">Feature</span><span class="plist__src"><b>The Sweet House</b><em class="mono">2021</em></span><span class="plist__title">Black Love Is History</span><span class="plist__go mono">Read ↗</span></a></li><li><a href="https://www.listennotes.com/podcasts/marcus-whitneys/e129-fatherhood-is-one-cC0tOBVg2yF/" target="_blank" rel="noopener"><span class="plist__kind mono">Podcast</span><span class="plist__src"><b>Marcus Whitney's Audio Universe</b><em class="mono">2020</em></span><span class="plist__title">Fatherhood is one helluva drug</span><span class="plist__go mono">Listen ↗</span></a></li><li><a href="https://momforce-podcast.libsyn.com/tktk" target="_blank" rel="noopener"><span class="plist__kind mono">Podcast</span><span class="plist__src"><b>The MomForce Podcast</b><em class="mono">2020</em></span><span class="plist__title">Destigmatizing fatherhood</span><span class="plist__go mono">Listen ↗</span></a></li></ul>
-  </div>
-  <div class="wrap">
-    <div class="passport">
-      <div class="passport__head"><p class="eyebrow mono">Passport</p><h3 class="passport__t">Carrying the message <em>past Nashville.</em></h3></div>
-      <div class="passport__grid">
-        <figure class="pol"><div class="pol__img"><img src="assets/img/harvard.jpg" alt="Aaron at a Harvard Business School podium" loading="lazy" data-fit></div><figcaption><b>Harvard Business School</b><span class="mono">Cambridge, MA</span></figcaption><svg class="stamp" viewBox="0 0 120 120" style="--r:8deg" aria-hidden="true"><defs><path id="st1a" d="M60,60 m-44,0 a44,44 0 1,1 88,0"/><path id="st1b" d="M16,60 a44,44 0 0,0 88,0"/></defs><circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="60" cy="60" r="34" fill="none" stroke="currentColor" stroke-width="1"/><text font-size="9.5" letter-spacing="1.6"><textPath href="#st1a" startOffset="50%" text-anchor="middle">HARVARD BUSINESS SCHOOL</textPath></text><text font-size="9.5" letter-spacing="1.6" dy="8"><textPath href="#st1b" startOffset="50%" text-anchor="middle">CAMBRIDGE</textPath></text><text x="60" y="58" text-anchor="middle" font-size="11" font-weight="700">✦ AM ✦</text><text x="60" y="72" text-anchor="middle" font-size="7.5" letter-spacing="1">NASHVILLE</text></svg></figure>
-        <figure class="pol"><div class="pol__img"><img src="assets/img/twente.jpg" alt="Aaron with arms wide in front of the University of Twente sign in the Netherlands" loading="lazy" data-fit></div><figcaption><b>University of Twente</b><span class="mono">Enschede, Netherlands</span></figcaption><svg class="stamp" viewBox="0 0 120 120" style="--r:-9deg" aria-hidden="true"><defs><path id="st2a" d="M60,60 m-44,0 a44,44 0 1,1 88,0"/><path id="st2b" d="M16,60 a44,44 0 0,0 88,0"/></defs><circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="60" cy="60" r="34" fill="none" stroke="currentColor" stroke-width="1"/><text font-size="9.5" letter-spacing="1.6"><textPath href="#st2a" startOffset="50%" text-anchor="middle">DESIGN THINKING</textPath></text><text font-size="9.5" letter-spacing="1.6" dy="8"><textPath href="#st2b" startOffset="50%" text-anchor="middle">NETHERLANDS</textPath></text><text x="60" y="58" text-anchor="middle" font-size="11" font-weight="700">✦ AM ✦</text><text x="60" y="72" text-anchor="middle" font-size="7.5" letter-spacing="1">NASHVILLE</text></svg></figure>
-        <figure class="pol"><div class="pol__img"><img src="assets/img/tsu-cardigan.jpg" alt="Aaron presenting his Design Your Voice workshop in a TSU cardigan" loading="lazy" data-fit></div><figcaption><b>University Innovation Fellows</b><span class="mono">Stanford d.school network</span></figcaption><svg class="stamp" viewBox="0 0 120 120" style="--r:12deg" aria-hidden="true"><defs><path id="st3a" d="M60,60 m-44,0 a44,44 0 1,1 88,0"/><path id="st3b" d="M16,60 a44,44 0 0,0 88,0"/></defs><circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="60" cy="60" r="34" fill="none" stroke="currentColor" stroke-width="1"/><text font-size="9.5" letter-spacing="1.6"><textPath href="#st3a" startOffset="50%" text-anchor="middle">FIRST INTERNATIONAL WORKSHOP</textPath></text><text font-size="9.5" letter-spacing="1.6" dy="8"><textPath href="#st3b" startOffset="50%" text-anchor="middle">UIF</textPath></text><text x="60" y="58" text-anchor="middle" font-size="11" font-weight="700">✦ AM ✦</text><text x="60" y="72" text-anchor="middle" font-size="7.5" letter-spacing="1">NASHVILLE</text></svg></figure>
-        <figure class="pol"><div class="pol__img"><img src="assets/img/unite.jpg" alt="Aaron walking with community members at the Unite Nashville prayer walk" loading="lazy" data-fit></div><figcaption><b>Robben Island to Jefferson Street</b><span class="mono">Cape Town, South Africa</span></figcaption><svg class="stamp" viewBox="0 0 120 120" style="--r:-9deg" aria-hidden="true"><defs><path id="st4a" d="M60,60 m-44,0 a44,44 0 1,1 88,0"/><path id="st4b" d="M16,60 a44,44 0 0,0 88,0"/></defs><circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="60" cy="60" r="34" fill="none" stroke="currentColor" stroke-width="1"/><text font-size="9.5" letter-spacing="1.6"><textPath href="#st4a" startOffset="50%" text-anchor="middle">CAPE TOWN</textPath></text><text font-size="9.5" letter-spacing="1.6" dy="8"><textPath href="#st4b" startOffset="50%" text-anchor="middle">SOUTH AFRICA</textPath></text><text x="60" y="58" text-anchor="middle" font-size="11" font-weight="700">✦ AM ✦</text><text x="60" y="72" text-anchor="middle" font-size="7.5" letter-spacing="1">NASHVILLE</text></svg></figure>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAMILY -->
-<section class="family" id="family">
-  <div class="family__bokeh" aria-hidden="true"><i style="--x:20%;--y:41%;--s:19px;--t:9.6s;--o:0.17"></i><i style="--x:87%;--y:31%;--s:27px;--t:17.0s;--o:0.32"></i><i style="--x:46%;--y:52%;--s:20px;--t:14.0s;--o:0.40"></i><i style="--x:62%;--y:94%;--s:17px;--t:12.3s;--o:0.47"></i><i style="--x:24%;--y:30%;--s:28px;--t:13.2s;--o:0.40"></i><i style="--x:1%;--y:42%;--s:19px;--t:8.2s;--o:0.43"></i><i style="--x:63%;--y:6%;--s:20px;--t:12.7s;--o:0.46"></i><i style="--x:35%;--y:71%;--s:22px;--t:8.2s;--o:0.18"></i><i style="--x:68%;--y:96%;--s:12px;--t:12.6s;--o:0.42"></i><i style="--x:32%;--y:36%;--s:13px;--t:11.7s;--o:0.42"></i><i style="--x:30%;--y:38%;--s:23px;--t:8.3s;--o:0.41"></i><i style="--x:74%;--y:31%;--s:11px;--t:16.0s;--o:0.26"></i><i style="--x:19%;--y:44%;--s:21px;--t:9.0s;--o:0.29"></i><i style="--x:33%;--y:83%;--s:16px;--t:16.6s;--o:0.23"></i><i style="--x:34%;--y:65%;--s:25px;--t:12.5s;--o:0.25"></i><i style="--x:12%;--y:53%;--s:10px;--t:16.1s;--o:0.53"></i><i style="--x:18%;--y:28%;--s:24px;--t:14.4s;--o:0.51"></i><i style="--x:35%;--y:13%;--s:12px;--t:15.9s;--o:0.27"></i><i style="--x:35%;--y:42%;--s:15px;--t:12.1s;--o:0.56"></i><i style="--x:16%;--y:0%;--s:27px;--t:16.8s;--o:0.59"></i><i style="--x:43%;--y:95%;--s:26px;--t:10.2s;--o:0.49"></i><i style="--x:84%;--y:66%;--s:17px;--t:10.9s;--o:0.30"></i><i style="--x:23%;--y:7%;--s:19px;--t:10.9s;--o:0.51"></i><i style="--x:5%;--y:90%;--s:21px;--t:17.2s;--o:0.55"></i><i style="--x:90%;--y:58%;--s:6px;--t:15.5s;--o:0.23"></i><i style="--x:30%;--y:66%;--s:18px;--t:12.1s;--o:0.57"></i></div>
-  <div class="wrap family__grid">
-    <div class="family__photos">
-      <figure class="fp fp--a"><img src="assets/img/terece-gala.jpg" alt="Aaron in a black tuxedo with Terece in a copper gown" loading="lazy" data-fit></figure>
-      <figure class="fp fp--b"><img src="assets/img/terece-black-tie.jpg" alt="Aaron and Terece at the 100 Black Men of Middle Tennessee black-tie gala" loading="lazy" data-fit></figure>
-      <figure class="fp fp--c"><img src="assets/img/firstdate.jpg" alt="Aaron and Terece sharing a laugh" loading="lazy" data-fit></figure>
-      <div class="gchip gchip--d"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><div><b>Since 2012</b><span>Met in class</span></div></div>
-    </div>
-    <div class="family__copy">
-      <p class="eyebrow mono">09 / The partnership</p>
-      <h2 class="h2">Behind every <em>"Dr."</em> is a we.</h2>
-      <p class="family__lede">Faith and family come first. Aaron and his wife, Terece, met in a classroom in 2012 and have built a life rooted in God's purpose, partnership and showing up for each other and their two children.</p>
-      <p>Terece is a devoted mother and an entrepreneur in her own right. Every degree, board seat and early morning on the hill is a family effort.</p>
-    </div>
-  </div>
-</section>
-
-<!-- GIVE -->
-<section class="give theme-dark" id="give">
-  <div class="wrap give__grid">
-    <div>
-      <p class="eyebrow mono">10 / Pay it forward</p>
-      <h2 class="h2">The Big Blue Energy <em>Leadership Scholarship.</em></h2>
-      <p>"Somebody poured into us. Now it is our turn." Dr. McGee's scholarship invests in the next generation of TSU student leaders through the TSU Foundation. Gifts go directly to the university and are tax deductible.</p>
-      <div class="row">
-        <a class="btn btn--gold magnetic" href="https://epay.tnstate.edu/C20204_ustores/web/product_detail.jsp?PRODUCTID=673&amp;FROMQRCODE=true" target="_blank" rel="noopener">Give to the scholarship</a>
-        <a class="btn btn--ghost magnetic" href="https://www.tnstate.edu/financial_aid/scholarships.aspx" target="_blank" rel="noopener">TSU students: apply</a>
-      </div>
-    </div>
-    <div class="yt yt--tall" data-yt="uQQEDcsxjvo" data-title="Big Blue Energy Scholarship at Tennessee State University" data-cursor="Play">
-      <img src="assets/img/scholar.jpg" alt="TSU Leadership Scholarship graphic with students in Big Blue Energy hats" loading="lazy" data-fit>
-      <button aria-label="Play scholarship video"><span></span></button>
-      <p class="yt__cap mono">Big Blue Energy Scholarship / 3 min</p>
-    </div>
-  </div>
-</section>
-
-<!-- WALL -->
-<section class="wall" aria-label="Instagram">
+<!-- 04 SELECTED IMPACT -->
+<section class="proof" id="impact">
   <div class="wrap">
     <div class="sechead sechead--row">
-      <div><p class="eyebrow mono">11 / On the feed</p><h2 class="h2">@draarontmcgee</h2></div>
-      <a class="btn btn--ghost magnetic" href="https://www.instagram.com/draarontmcgee/" target="_blank" rel="noopener">Follow on Instagram</a>
+      <div><p class="eyebrow mono">04 / Selected impact</p><h2 class="h2">The record, <em>briefly.</em></h2></div>
+      <a class="tlink" href="impact.html">See the full record <i>→</i></a>
     </div>
+    <ol class="proof__list">
+      <li><span class="proof__big">Ed.D.</span><div><b>Doctor of Education, Higher Education Leadership</b><span>Tennessee State University, 2026</span></div></li>
+      <li><span class="proof__big">2019</span><div><b>Nashville Sports Authority</b><span>On the board since 2019, an officer since 2023 and today its Secretary-Treasurer</span></div></li>
+      <li><span class="proof__big">15+</span><div><b>Years of community leadership</b><span>Youth development, nonprofit leadership and civic engagement across Nashville</span></div></li>
+      <li><span class="proof__big">46</span><div><b>Fatherhood Is Dope</b><span>Episodes of the podcast he hosts on engaged fatherhood</span></div></li>
+    </ol>
   </div>
-  <div class="wall__rows" data-wall></div>
 </section>
 
-<!-- CONNECT -->
-<section class="connect" id="connect">
-  <div class="connect__orb" aria-hidden="true"></div>
-  <div class="wrap connect__grid">
-    <div>
-      <p class="eyebrow mono">12 / Connect</p>
-      <h2 class="h2 h2--xl">Let's <em>win</em> together.</h2>
-      <p>Keynotes, workshops, executive coaching, student programs, training and media. Tell him what you are building.</p>
-      <div class="links">
-        <a href="https://www.instagram.com/draarontmcgee/" target="_blank" rel="noopener"><span class="mono">Instagram</span><b>@draarontmcgee</b><i>↗</i></a>
-        <a href="https://www.instagram.com/coachacontent/" target="_blank" rel="noopener"><span class="mono">Training</span><b>@coachacontent</b><i>↗</i></a>
-        <a href="https://www.linkedin.com/in/aaronmcgee" target="_blank" rel="noopener"><span class="mono">LinkedIn</span><b>Dr. Aaron T. McGee</b><i>↗</i></a>
-        <a href="https://substack.com/@draarontmcgee" target="_blank" rel="noopener"><span class="mono">Substack</span><b>Letters to leaders</b><i>↗</i></a>
-        <a href="https://www.youtube.com/@BigLeadershipEnergy" target="_blank" rel="noopener"><span class="mono">YouTube</span><b>Big Leadership Energy</b><i>↗</i></a>
-        <a href="https://www.instagram.com/fatherhoodisdope/" target="_blank" rel="noopener"><span class="mono">Podcast</span><b>@fatherhoodisdope</b><i>↗</i></a>
-      </div>
-      <details class="bio">
-        <summary><span class="mono">For event hosts</span><b>Official bio</b><i>+</i></summary>
-        <div class="bio__text" data-bio><p>Dr. Aaron T. McGee is a leadership educator, civic leader, and founder of Big Leadership Energy, a social enterprise and cultural platform developing leaders through voice, clarity, and authentic presence.</p><p>A Nashville native, Dr. McGee holds an Ed.D. in Higher Education Leadership from Tennessee State University, a Master of Arts in Civic Leadership from Lipscomb University, and a Bachelor of Science in Mass Communication. His doctoral research looks at gaps in youth leadership skills and at how co-governance structures in community organizations can co-opt the voices they are meant to elevate.</p><p>He has more than 15 years of experience in youth development, nonprofit leadership, and civic engagement. Over that time he has served as Program Director, Executive Director, CEO, Vice President, and Board Chairman across several sectors. He serves on the Nashville Sports Authority Board and works as a Senior Operations Manager at an organization committed to social justice and community organizing.</p><p>In March 2022, Dr. McGee founded Big Leadership Energy to help young leaders build self-efficacy, advocate authentically, and define their voice with clarity and purpose. Through BLE, he offers leadership coaching, workshops, and curriculum design to student leaders, emerging professionals, universities, and community organizations in Nashville and beyond.</p><p>Big Leadership Energy is also a cultural voice. Drawing on his background in mass communication, Dr. McGee uses social media and storytelling to share the stories of leaders across generations.</p><p>Dr. McGee is rooted in faith and servant leadership. He believes real change comes from leaders who understand their own power and use it to serve their communities.</p></div>
-        <button type="button" class="btn btn--ghost bio__copy" data-copy-bio>Copy bio</button>
-      </details>
+<!-- 05 THE FOUR PILLARS -->
+<section class="hpill" id="pillars">
+  <div class="wrap hpill__grid">
+    <figure class="hpill__img"><img src="assets/img/dad.jpg" alt="Aaron hugging his two young children outdoors" loading="lazy" data-fit></figure>
+    <div class="hpill__copy">
+      <p class="eyebrow mono">05 / The four pillars</p>
+      <h2 class="h2">Faith. Family. <em>Fatherhood. Fitness.</em></h2>
+      <ul class="hpill__list">
+        <li><span class="mono">F/01</span><b>Faith</b><p>Servant leadership first. Philippians 4:13 is the verse he lives by.</p></li>
+        <li><span class="mono">F/02</span><b>Family</b><p>Husband to Terece and a father of two. His anchor through every season.</p></li>
+        <li><span class="mono">F/03</span><b>Fatherhood</b><p>Doing Our Part Everyday, on the podcast and at home.</p></li>
+        <li><span class="mono">F/04</span><b>Fitness</b><p>Coach A on the hill. Big kids need P.E. too.</p></li>
+      </ul>
+      <a class="tlink" href="about.html#pillars">The stories behind them <i>→</i></a>
     </div>
-    <form class="form" data-form novalidate>
-      <svg class="form__seal" aria-hidden="true"><use href="#seal"/></svg>
-      <p class="mono form__k">Booking inquiry</p>
-      <div class="chips" role="group" aria-label="What do you need?">
-        <button type="button" class="tag is-on">Keynote or workshop</button>
-        <button type="button" class="tag">Executive coaching</button>
-        <button type="button" class="tag">Student leadership program</button>
-        <button type="button" class="tag">Personal training</button>
-        <button type="button" class="tag">Media or podcast</button>
-      </div>
-      <label><span>Your name</span><input name="name" autocomplete="name" required></label>
-      <label><span>Organization</span><input name="org" autocomplete="organization"></label>
-      <label><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
-      <label><span>Date and details</span><textarea name="msg" rows="4"></textarea></label>
-      <button class="btn btn--gold btn--wide magnetic" type="submit">Send inquiry</button>
-      <p class="form__note" data-form-note>Online booking is being set up. For now, message <a href="https://www.instagram.com/draarontmcgee/" target="_blank" rel="noopener">@draarontmcgee</a> on Instagram.</p>
-    </form>
+  </div>
+</section>
+
+<!-- 06 CONNECT -->
+<section class="hcta" id="connect">
+  <div class="wrap">
+    <div class="hcta__panel theme-dark">
+      <svg class="hcta__seal" aria-hidden="true"><use href="#seal"/></svg>
+      <p class="eyebrow mono">06 / Connect</p>
+      <h2 class="h2 h2--xl">Let's <em>win</em> together.</h2>
+      <p class="hcta__p">Speaking, coaching, training or partnership. Tell Dr. McGee what you are building.</p>
+      <a class="btn btn--gold magnetic" href="connect.html">Book Dr. McGee</a>
+    </div>
   </div>
 </section>
 
@@ -508,6 +204,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="assets/js/site.js?v=22210982"></script>
+<script src="assets/js/site.js?v=6b82f7c2"></script>
 </body>
 </html>
