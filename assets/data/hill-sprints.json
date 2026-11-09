@@ -1,1 +1,1 @@
-{"note":"Real Hill Sprints and Devotions dates only. Add one entry per session, date as YYYY-MM-DD, time 24h Central. Past dates are skipped automatically. Empty list = site says next date coming soon.","sessions":[]}
+{"note":"Hill Sprints and Devotions run the 1st and 3rd Saturday of every month (per Dr. McGee, Nov 8 2026). weekday 6 = Saturday. Add a date to skip (YYYY-MM-DD) to cancel one; add sessions[] for one-off extra dates.","rule":{"weekday":6,"weeks":[1,3],"time":"06:30","minutes":45,"skip":[]},"sessions":[]}

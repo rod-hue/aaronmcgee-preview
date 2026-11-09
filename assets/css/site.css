@@ -936,3 +936,6 @@ body{background:var(--bg);color:var(--text)}
 .ble__media--solo .ble__quote{max-width:900px}
 @media (max-width:900px){.pitch{grid-template-columns:1fr}}
 @media (max-width:600px){.pitch__frame{aspect-ratio:16/9}.pitch__frame .film__play{width:72px;height:72px}.pitch__frame .film__cap b{font-size:15px}.pitch__frame .film__cap{left:16px;right:16px;bottom:12px}}
+
+/* hero subheading (his own description) */
+.hero__sub{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(18px,1.5vw,24px);line-height:1.35;color:var(--green);margin:14px 0 12px;max-width:460px}

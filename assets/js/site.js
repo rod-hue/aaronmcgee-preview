@@ -8,7 +8,7 @@
   if (hasG && typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
   const TZ = 'America/Chicago';
   // Booking inquiries: set to Dr. McGee's chosen address (e.g. 'hello@draarontmcgee.com'). Empty = form shows 'coming soon'.
-  const BOOKING_EMAIL = '';
+  const BOOKING_EMAIL = 'draarontmcgee@gmail.com';
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
   /* ---------- nav height var ---------- */
@@ -149,17 +149,32 @@
   const tzOffset = d => { const p = partsIn(d); return (Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute) - Math.floor(d.getTime() / 60000) * 60000) / 60000; };
   const chicagoTime = (y, m, day, h, min) => { const g = new Date(Date.UTC(y, m, day, h, min)); return new Date(g.getTime() - tzOffset(g) * 60000); };
   // Real dates only. Edit assets/data/hill-sprints.json: {"sessions":[{"date":"2026-11-21","time":"06:30","minutes":60}]}
-  let SESSIONS = [];
+  let SESSIONS = [], RULE = null;
   function nextSession(now = new Date()) {
     for (const s of SESSIONS) {
       const [y, m, d] = s.date.split('-').map(Number), [hh, mm] = (s.time || '06:30').split(':').map(Number);
       const start = chicagoTime(y, m - 1, d, hh, mm), end = new Date(start.getTime() + (s.minutes || 60) * 60000);
       if (end > now) return { start, end };
     }
+    // recurring rule from the schedule file, e.g. 1st and 3rd Saturdays at 6:30
+    if (RULE && RULE.weeks) {
+      const p = partsIn(now);
+      for (let k = 0; k < 3; k++) {
+        const y = p.year + Math.floor((p.month - 1 + k) / 12), m = (p.month - 1 + k) % 12;
+        const first = 1 + ((RULE.weekday - new Date(Date.UTC(y, m, 1)).getUTCDay() + 7) % 7);
+        for (const w of RULE.weeks) {
+          const day = first + (w - 1) * 7, iso = `${y}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+          if ((RULE.skip || []).includes(iso)) continue;
+          const [hh, mm] = (RULE.time || '06:30').split(':').map(Number);
+          const start = chicagoTime(y, m, day, hh, mm), end = new Date(start.getTime() + (RULE.minutes || 45) * 60000);
+          if (end > now) return { start, end };
+        }
+      }
+    }
     return null;
   }
   fetch('assets/data/hill-sprints.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
-    SESSIONS = (d.sessions || []).slice().sort((x, y) => (x.date + x.time).localeCompare(y.date + y.time));
+    RULE = d.rule || null; SESSIONS = (d.sessions || []).slice().sort((x, y) => (x.date + x.time).localeCompare(y.date + y.time));
     sess = nextSession(); tick();
   }).catch(() => {});
   const fmt = (d, o) => new Intl.DateTimeFormat('en-US', { timeZone: TZ, ...o }).format(d);
