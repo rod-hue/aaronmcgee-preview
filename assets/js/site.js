@@ -10,6 +10,7 @@
   // Booking inquiries: set to Dr. McGee's chosen address (e.g. 'hello@draarontmcgee.com'). Empty = form shows 'coming soon'.
   const BOOKING_EMAIL = 'draarontmcgee@gmail.com';
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const R = document.documentElement.dataset.root || '';   // '../' on /about/ etc.
 
   /* ---------- nav height var ---------- */
   const nav = $('.nav');
@@ -44,7 +45,7 @@
     img._amp = Math.max(0, Math.min(26, headPx - 4, bottomSlack));
   }
   const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(es => es.forEach(e => fit(e.target))) : null;
-  fetch('assets/data/focal.json').then(r => r.json()).then(d => {
+  fetch(R + 'assets/data/focal.json').then(r => r.json()).then(d => {
     FOCAL = d;
     $$('img[data-fit]').forEach(img => { const go = () => fit(img); img.complete ? go() : img.addEventListener('load', go, { once: true }); ro?.observe(img); });
   }).catch(() => {});
@@ -78,7 +79,7 @@
   menu.addEventListener('click', () => { const open = !drawer.classList.contains('is-open'); drawer.classList.toggle('is-open', open); menu.setAttribute('aria-expanded', String(open)); drawer.setAttribute('aria-hidden', String(!open)); });
   const links = $$('.nav__links a');
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle('is-on', l.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
-  links.forEach(l => { const s = $(l.getAttribute('href')); if (s) io.observe(s); });
+  links.forEach(l => { const h = l.getAttribute('href'); const s = h.startsWith('#') && h.length > 1 ? $(h) : null; if (s) io.observe(s); });
 
   /* ---------- cursor ---------- */
   const cur = $('.cursor'), curLabel = $('.cursor__label');
@@ -134,7 +135,7 @@
   const spot = $('.hero__spot'), backlight = $('.hero__backlight');
   $$('.hero__namefilm').forEach(v => { new IntersectionObserver(([e]) => e.isIntersecting && !reduce ? v.play().catch(() => {}) : v.pause()).observe(v); });
   const hfilm = $('.hero__film'); if (hfilm) { if (reduce) hfilm.removeAttribute('autoplay'); new IntersectionObserver(([e]) => e.isIntersecting && !reduce ? hfilm.play().catch(() => {}) : hfilm.pause()).observe(hfilm); }
-  if (fine && !reduce && hasG) {
+  if (hero && fine && !reduce && hasG) {
     const setters = layers.map(l => ({ d: +l.dataset.depth, x: gsap.quickTo(l, 'x', { duration: 1.2, ease: 'power3' }), y: gsap.quickTo(l, 'y', { duration: 1.2, ease: 'power3' }) }));
     hero.addEventListener('mousemove', e => {
       const r = hero.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
@@ -173,7 +174,7 @@
     }
     return null;
   }
-  fetch('assets/data/hill-sprints.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
+  fetch(R + 'assets/data/hill-sprints.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
     RULE = d.rule || null; SESSIONS = (d.sessions || []).slice().sort((x, y) => (x.date + x.time).localeCompare(y.date + y.time));
     sess = nextSession(); tick();
   }).catch(() => {});
@@ -255,10 +256,10 @@
 
   /* ---------- instagram wall ---------- */
   const wall = $('[data-wall]');
-  fetch('assets/data/wall.json').then(r => r.json()).then(items => {
+  fetch(R + 'assets/data/wall.json').then(r => r.json()).then(items => {
     [items.slice(0, 24)].forEach((row, k) => {
       const el = document.createElement('div'); el.className = 'wall__row';
-      const html = row.map(p => `<a href="${p.u}" target="_blank" rel="noopener" data-cursor="Open"><img src="${p.i}" alt="${p.a.replace(/"/g, '&quot;')}" loading="lazy"></a>`).join('');
+      const html = row.map(p => `<a href="${p.u}" target="_blank" rel="noopener" data-cursor="Open"><img src="${R}${p.i}" alt="${p.a.replace(/"/g, '&quot;')}" loading="lazy"></a>`).join('');
       el.innerHTML = html + html.replace(/<a /g, '<a aria-hidden="true" tabindex="-1" ');
       wall.appendChild(el);
       if (fine) $$('a', el).forEach(a => { a.addEventListener('mouseenter', () => { curLabel.textContent = 'Open'; cur.classList.add('is-label'); }); a.addEventListener('mouseleave', () => cur.classList.remove('is-label')); });
@@ -313,34 +314,54 @@
   /* ---------- draw-on paths: measure ---------- */
   $$('.draw').forEach(p => { try { p.style.setProperty('--len', Math.ceil(p.getTotalLength())); } catch (e) {} });
 
-  /* ---------- loader + intro ---------- */
-  const loader = $('.loader'), lbar = $('.loader__bar i'), num = $('.loader__n');
+  /* ---------- booking topic carried over from other pages (connect/?topic=...) ---------- */
+  try { const tp = new URLSearchParams(location.search).get('topic'); if (tp) pickTag(tp); } catch (e) {}
+
+  /* ---------- analytics hooks: push to dataLayer / gtag only if an analytics tag is installed ---------- */
+  const track = (name, extra = {}) => { try { (window.dataLayer = window.dataLayer || []).push({ event: name, page: location.pathname, ...extra }); window.gtag?.('event', name, extra); } catch (e) {} };
+  const INTERIOR = /^(\.\.\/|\.\/)?(about|work|impact|media|connect)\//;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-track]');
+    if (a) return track(a.dataset.track, { href: a.getAttribute('href') || '' });
+    const l = e.target.closest('a[href]'); if (!l) return;
+    const h = l.getAttribute('href');
+    if (INTERIOR.test(h)) track('nav_interior', { href: h });
+    else if (/spotify|podcasts\.apple|youtube|youtu\.be/.test(h) || l.closest('.pod, .plist, .eps')) track('media_click', { href: h });
+  });
+  $$('[data-yt-open]').forEach(el => el.addEventListener('click', () => track('podcast_episode_play', { id: el.dataset.ytOpen })));
+  if ('IntersectionObserver' in window) { const seenS = new Set(); const sio = new IntersectionObserver(es => es.forEach(e => { const k = e.target.dataset.section; if (e.isIntersecting && !seenS.has(k)) { seenS.add(k); track('section_view', { section: k }); } }), { threshold: .35 }); $$('[data-section]').forEach(x => sio.observe(x)); }
+  $('[data-form]')?.addEventListener('submit', () => track('booking_form_submit'));
+
+  /* ---------- loader (first homepage visit per session only) + intro ---------- */
+  let loader = $('.loader'); const lbar = $('.loader__bar i'), num = $('.loader__n');
+  let seen = false; try { seen = sessionStorage.getItem('am-seen') === '1'; sessionStorage.setItem('am-seen', '1'); } catch (e) {}
+  if (loader && seen) { loader.remove(); loader = null; }
   const crit = [$('.hero__man img')].filter(Boolean);
-  let done = 0; const total = crit.length || 1;
-  const prog = () => { const p = Math.round(done / total * 100); lbar.style.width = p + '%'; num.textContent = String(p).padStart(3, '0'); };
+  let done = 0; const total = crit.length;
+  const prog = () => { if (!loader) return; const p = total ? Math.round(done / total * 100) : 100; lbar.style.width = p + '%'; num.textContent = String(p).padStart(3, '0'); };
   crit.forEach(i => { if (i.complete) done++; else { i.addEventListener('load', () => { done++; prog(); }, { once: true }); i.addEventListener('error', () => { done++; prog(); }, { once: true }); } });
   prog();
-  const t0 = performance.now();
-  const ready = new Promise(res => { const chk = () => ((done >= total && document.fonts?.status !== 'loading') || performance.now() - t0 > 4000) ? res() : setTimeout(chk, 60); chk(); });
-  ready.then(() => setTimeout(intro, Math.max(0, 1100 - (performance.now() - t0))));
+  const t0 = performance.now(), cap = loader ? 4000 : 1200;
+  const ready = new Promise(res => { const chk = () => ((done >= total && document.fonts?.status !== 'loading') || performance.now() - t0 > cap) ? res() : setTimeout(chk, 60); chk(); });
+  ready.then(() => setTimeout(intro, loader ? Math.max(0, 1100 - (performance.now() - t0)) : 0));
 
   function intro() {
-    lbar.style.width = '100%'; num.textContent = '100';
-    if (!hasG || reduce) { loader.remove(); setupScroll(); return; }
+    if (loader) { lbar.style.width = '100%'; num.textContent = '100'; }
+    if (!hasG || reduce) { loader?.remove(); setupScroll(); return; }
     const tl = gsap.timeline();
-    tl.to('.loader__seal', { scale: .4, opacity: 0, rotate: 120, duration: .7, ease: 'power3.in' })
-      .to('.loader__bar,.loader__n', { opacity: 0, duration: .3 }, '<')
-      .to(loader, { clipPath: 'circle(0% at 58% 30%)', duration: 1.1, ease: 'expo.inOut' }, '-=.15')
-      .add(() => loader.remove())
-      .from('.hero__layer--name .hn b', { yPercent: 120, opacity: 0, stagger: .06, duration: 1.3, ease: 'expo.out' }, '-=.75')
-      .from('.hero__medal', { scale: .3, opacity: 0, rotate: -160, duration: 1.8, ease: 'expo.out' }, '-=1.15')
+    if (loader) tl.to('.loader__bar,.loader__n', { opacity: 0, duration: .4 })
+      .to(loader, { clipPath: 'circle(0% at 58% 30%)', duration: 1.1, ease: 'expo.inOut' }, '-=.1')
+      .add(() => loader.remove());
+    if ($('.hero__man')) tl.from('.hero__layer--name .hn b', { yPercent: 120, opacity: 0, stagger: .06, duration: 1.3, ease: 'expo.out' }, loader ? '-=.75' : 0)
       .from('.hero__man', { clipPath: 'inset(100% -20% 0% -20%)', y: 80, duration: 1.6, ease: 'expo.out' }, '-=1.6')
       .from('.hero__film', { opacity: 0, duration: 2.4 }, '<')
       .from('.hero__rays', { opacity: 0, duration: 2 }, '<')
       .from('.hero__left > *', { y: 26, opacity: 0, stagger: .07, duration: .9, ease: 'power3.out' }, '-=1.1')
-      .from('.hero__chips .chip', { x: 40, opacity: 0, stagger: .1, duration: 1, ease: 'expo.out' }, '<.1')
-      .from('.hud', { yPercent: 100, duration: .9, ease: 'expo.out' }, '<.2')
-      .add(setupScroll, '-=.6');
+      .from('.hud', { yPercent: 100, duration: .9, ease: 'expo.out' }, '<.2');
+    if ($('.phead')) tl.from('.phead__word', { yPercent: 40, opacity: 0, duration: 1.6, ease: 'expo.out' }, 0)
+      .from('.phead__copy > *', { y: 34, opacity: 0, stagger: .08, duration: 1.1, ease: 'expo.out' }, .1)
+      .from('.phead__img', { clipPath: 'inset(100% 0 0 0 round 22px)', duration: 1.4, ease: 'expo.out' }, .2);
+    tl.add(setupScroll, $('.hero__man') ? '-=.6' : '>-.4');
   }
 
   /* ---------- scroll choreography ---------- */
@@ -349,7 +370,7 @@
     const desk = matchMedia('(min-width: 901px)').matches;
 
     // hero exit: name splits around him, halo spins away, he steps forward
-    if (!reduce) {
+    if (!reduce && $('.hero')) {
       const ht = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
       ht.to('.hero__layer--name .hn--l', { xPercent: -30, ease: 'none' }, 0)
         .to('.hero__layer--name .hn--r', { xPercent: 36, ease: 'none' }, 0)
@@ -367,7 +388,7 @@
     });
 
     // manifesto words + counters + rings
-    gsap.to('.manifesto .w', { opacity: 1, stagger: .02, ease: 'none', scrollTrigger: { trigger: '.manifesto__text', start: 'top 80%', end: 'bottom 45%', scrub: true } });
+    if ($('.manifesto__text')) gsap.to('.manifesto .w', { opacity: 1, stagger: .02, ease: 'none', scrollTrigger: { trigger: '.manifesto__text', start: 'top 80%', end: 'bottom 45%', scrub: true } });
     if ($('.stats')) ScrollTrigger.create({ trigger: '.stats', start: 'top 85%', once: true, onEnter: () => $('.stats').classList.add('is-in') });
     $$('.stat').forEach(st => {
       const el = $('[data-count]', st), ring = $('.ring__v', st), end = +el.dataset.count, dec = +(el.dataset.dec || 0), o = { v: 0 };
@@ -391,17 +412,21 @@
       .to({}, { duration: .6 }); }
 
     // generic reveals
-    $$('.sechead .eyebrow, .sechead__sub, .plist li, .offer, .stages__list li, .gantt__row, .coach__creds > div, .eps li, .links a, .hillcard, .countdown, .passport__head').forEach(el => {
+    $$('.sechead .eyebrow, .sechead__sub, .plist li, .offer, .stages__list li, .gantt__row, .coach__creds > div, .eps li, .links a, .hillcard, .countdown, .passport__head, .meet__copy > :not(.h2), .path, .ilist li, .hpill__copy > :not(.h2), .hmc__mcopy > :not(.hmc__h), .hmc__cta > :not(.h2), .steps__list li, .pnext a').forEach(el => {
       gsap.from(el, { y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
     });
     // image curtain reveals + face-anchored parallax
-    $$('.cs, .fp, .civic__img, .pod__cover').forEach(el => {
+    $$('.cs, .fp, .civic__img, .pod__cover, .meet__img, .hpill__img, .path__art--photo').forEach(el => {
       gsap.from(el, { clipPath: 'inset(0 0 100% 0 round 22px)', duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
       const im = $('img', el); if (im && !reduce) { im.style.scale = '1.06'; ScrollTrigger.create({ trigger: el, start: 'top bottom', end: 'bottom top', onUpdate: s => { im.style.translate = `0 ${(-(im._amp || 0) * s.progress).toFixed(1)}px`; } }); }
     });
     // BLE bg + footer drift + film zoom
-    gsap.fromTo('.ble__bg', { xPercent: 0 }, { xPercent: -40, ease: 'none', scrollTrigger: { trigger: '.ble', start: 'top bottom', end: 'bottom top', scrub: true } });
-    gsap.from('.film > .wrap > .film__frame', { scale: .86, ease: 'none', scrollTrigger: { trigger: '.film', start: 'top bottom', end: 'center center', scrub: true } });
+    if ($('.ble')) gsap.fromTo('.ble__bg', { xPercent: 0 }, { xPercent: -40, ease: 'none', scrollTrigger: { trigger: '.ble', start: 'top bottom', end: 'bottom top', scrub: true } });
+    if ($('.phead__word')) gsap.to('.phead__word', { xPercent: -12, ease: 'none', scrollTrigger: { trigger: '.phead', start: 'top top', end: 'bottom top', scrub: true } });
+    if ($('.hwork__bg')) gsap.fromTo('.hwork__bg', { xPercent: 10 }, { xPercent: -25, ease: 'none', scrollTrigger: { trigger: '.hwork', start: 'top bottom', end: 'bottom top', scrub: true } });
+    if ($('.himpact__word')) gsap.fromTo('.himpact__word', { xPercent: 8 }, { xPercent: -18, ease: 'none', scrollTrigger: { trigger: '.himpact', start: 'top bottom', end: 'bottom top', scrub: true } });
+    $$('.phat').forEach((h, i) => gsap.to(h, { y: '+=14', rotate: i % 2 ? 4 : -4, duration: 2.4 + i * .5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    if ($('.film')) gsap.from('.film > .wrap > .film__frame', { scale: .86, ease: 'none', scrollTrigger: { trigger: '.film', start: 'top bottom', end: 'center center', scrub: true } });
 
     // hats: float, orbit on scroll, tilt with mouse
     const hats = $$('.hat');
@@ -422,7 +447,8 @@
     }
     // skyline draw
     const sky = $('.skyline__line');
-    if (sky) gsap.to(sky, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.civic', start: 'top 90%', end: 'top 25%', scrub: 1, onLeave: () => $('.civic').classList.add('is-lit'), onUpdate: s => s.progress > .8 && $('.civic').classList.add('is-lit') } });
+    const skyHost = sky?.closest('.civic, .path__art--sky');
+    if (sky && skyHost) gsap.to(sky, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: skyHost, start: 'top 90%', end: 'top 35%', scrub: 1, onLeave: () => skyHost.classList.add('is-lit'), onUpdate: s => s.progress > .8 && skyHost.classList.add('is-lit') } });
 
     // headlines rise word by word
     $$('.h2.is-split').forEach(h => { if (h.closest('.doctor')) return; gsap.from($$('.wi', h), { yPercent: 115, rotate: 4, duration: 1.1, ease: 'expo.out', stagger: .05, scrollTrigger: { trigger: h, start: 'top 88%', once: true } }); });
@@ -459,7 +485,7 @@
     if ($('.give__hat')) { gsap.to('.give__hat', { y: 18, rotate: 6, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1 }); gsap.fromTo('.give__hat', { rotateY: -40 }, { rotateY: 30, ease: 'none', scrollTrigger: { trigger: '.give', start: 'top bottom', end: 'bottom top', scrub: 1 } }); }
 
     // story horizontal pin + connecting line
-    ScrollTrigger.matchMedia({
+    if ($('.story__track')) ScrollTrigger.matchMedia({
       '(min-width: 821px)': () => {
         const track = $('.story__track'), pbar = $('.story__progress i'), path = $('.story__path'), svgEl = $('.story__line'), chaps = $$('.chap');
         const build = () => {
